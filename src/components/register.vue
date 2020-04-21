@@ -1,5 +1,5 @@
 <template>
-  <div class="reg">
+  <div class="reg animated jackInTheBox">
     <div class="Tologin">
       <router-link to="/"><span class="el-icon-s-custom" />login</router-link>
     </div>
@@ -13,6 +13,7 @@
         class="input"
         type="text"
         v-model="user"
+        maxlength="12"
       />
       <span class="title" data-placeholder="账号" />
     </div>
@@ -25,6 +26,7 @@
         class="input"
         type="password"
         v-model="password"
+        maxlength="16"
       />
       <span class="title" data-placeholder="密码" />
     </div>
@@ -37,6 +39,7 @@
         class="input"
         type="password"
         v-model="Repwd"
+        maxlength="16"
       />
       <span class="title" data-placeholder="确认密码" />
     </div>
@@ -49,12 +52,12 @@
         class="input"
         type="email"
         v-model="email"
+        maxlength="30"
       />
       <span class="title" data-placeholder="邮箱" />
     </div>
     <!--确认-->
     <input @click="register()" class="btn" type="button" value="确认" />
-
   </div>
 </template>
 
@@ -129,10 +132,11 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  margin-left: -185px;
+  margin-top: -325px;
   padding: 20px 48px;
   border-radius: 10px;
-  background: rgba(255,255,255,0.7);
+  background: rgba(255, 255, 255, 0.7);
   //返回login页面
   .Tologin {
     position: absolute;
@@ -203,7 +207,7 @@
 }
 
 .f + .title::before {
-  top: -17px;
+  top: -22px;
   color: #0097e6;
   font-weight: bold;
 }

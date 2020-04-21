@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login animated rollIn">
     <h1>登录</h1>
     <!--账号-->
     <div class="dy">
@@ -42,8 +42,10 @@
 
 <script>
     import axios from "axios";
+    import $ from "animate.css";
 
     export default {
+  $,
   name: "login",
   data() {
     return {
@@ -80,7 +82,6 @@
   margin: 0;
   padding: 0;
 }
-
 .login {
   box-sizing: border-box;
   width: 360px;
@@ -88,10 +89,11 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  margin-left: -180px;
+  margin-top: -275px;
   padding: 20px 40px;
   border-radius: 10px;
-  background: rgba(255,255,255,0.7);
+  background: rgba(255, 255, 255, 0.7);
   h1 {
     margin: 60px 0;
     text-align: center;
@@ -156,7 +158,7 @@
 
   a {
     font-size: 14px;
-    color: #74b9ff;
+    color: #a29bfe;
     position: absolute;
     right: 0;
     top: -20px;
@@ -164,7 +166,7 @@
     font-weight: bold;
 
     &:hover {
-      color: #a29bfe;
+      color: #74b9ff;
     }
   }
 }
