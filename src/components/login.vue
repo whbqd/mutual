@@ -64,14 +64,19 @@
           user: this.user,
           password: this.password
         }
-      }).then(res => {
-        if (res.data.msg === false) {
-          this.$message.error("账号或密码错误！");
-        } else {
-          this.$message.success("登录成功！");
-        }
-        console.log(res);
-      });
+      })
+        .then(res => {
+          if (res.data.msg === false) {
+            this.$message.error("账号或密码错误！");
+          } else {
+            this.$message.success("登录成功！");
+          }
+          console.log(res);
+        })
+        .erarr(error => {
+          error;
+          this.$message.error("服务器异常！");
+        });
     }
   }
 };

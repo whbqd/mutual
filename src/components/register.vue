@@ -103,17 +103,22 @@
           password: this.password,
           email: this.email
         }
-      }).then(res => {
-        console.log(res);
-        if (res.data.repeatUser) {
-          this.$message.error("账号已被注册！");
-        } else if (res.data.msg) {
-          this.$message.success("注册成功！");
-          this.$router.push("/");
-        } else if (!res.data.msg) {
-          this.$message.error("注册失败！");
-        }
-      });
+      })
+        .then(res => {
+          console.log(res);
+          if (res.data.repeatUser) {
+            this.$message.error("账号已被注册！");
+          } else if (res.data.msg) {
+            this.$message.success("注册成功！");
+            this.$router.push("/");
+          } else if (!res.data.msg) {
+            this.$message.error("注册失败！");
+          }
+        })
+        .erarr(error => {
+          error;
+          this.$message.error("服务器异常！");
+        });
     }
   }
 };
