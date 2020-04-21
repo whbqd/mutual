@@ -1,14 +1,9 @@
 <template>
   <div id="app">
-    <login />
+    <router-view />
+    <!--<register />-->
   </div>
 </template>
 <script>
-    import login from "./components/login";
-
-    export default {
-        components: {
-            login
-        }
-    };
+export default {};
 </script>

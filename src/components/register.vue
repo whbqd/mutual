@@ -1,6 +1,9 @@
 <template>
-  <div class="login">
-    <h1>登录</h1>
+  <div class="reg">
+    <div class="Tologin">
+      <router-link to="/"><span class="el-icon-s-custom" />login</router-link>
+    </div>
+    <h1>注册</h1>
     <!--账号-->
     <div class="dy">
       <input
@@ -25,18 +28,33 @@
       />
       <span class="title" data-placeholder="密码" />
     </div>
-    <div class="forget"><a href="#">忘记密码？</a></div>
-    <!--登录-->
-    <input
-      @click="login(user, password)"
-      class="btn"
-      type="button"
-      value="登录"
-    />
-    <!--注册-->
-    <div class="register">
-      没有账号，点击注册? <router-link to="/register">注册</router-link>
+    <!--确认密码-->
+    <div class="dy">
+      <input
+        :class="{ f: RepwdFocus || Repwd !== '' }"
+        @blur="RepwdFocus = false"
+        @focus="RepwdFocus = true"
+        class="input"
+        type="password"
+        v-model="Repwd"
+      />
+      <span class="title" data-placeholder="确认密码" />
     </div>
+    <!--邮箱-->
+    <div class="dy">
+      <input
+        :class="{ f: emailFocus || email !== '' }"
+        @blur="emailFocus = false"
+        @focus="emailFocus = true"
+        class="input"
+        type="email"
+        v-model="email"
+      />
+      <span class="title" data-placeholder="邮箱" />
+    </div>
+    <!--确认-->
+    <input @click="register()" class="btn" type="button" value="确认" />
+
   </div>
 </template>
 
@@ -44,31 +62,54 @@
     import axios from "axios";
 
     export default {
-  name: "login",
+  name: "register",
   data() {
     return {
       UserFocus: false,
       user: "",
       PwdFocus: false,
-      password: ""
+      password: "",
+      Repwd: "",
+      RepwdFocus: false,
+      email: "",
+      emailFocus: false
     };
   },
   methods: {
-    login() {
+    register() {
+      //判断是否有空值
+      if (
+        this.user === "" ||
+        this.password === "" ||
+        this.Repwd === "" ||
+        this.email === ""
+      ) {
+        this.$message.warning("请将信息补全！");
+        return false;
+      }
+      //判断确认密码是否一致
+      if (this.password !== this.Repwd) {
+        this.$message.warning("密码不一致");
+        return false;
+      }
       axios({
-        url: "http://localhost:8080/Backend/login",
+        url: "http://localhost:8080/Backend/register",
         methods: "get",
         params: {
           user: this.user,
-          password: this.password
+          password: this.password,
+          email: this.email
         }
       }).then(res => {
-        if (res.data.msg === false) {
-          this.$message.error("账号或密码错误！");
-        } else {
-          this.$message.success("登录成功！");
-        }
         console.log(res);
+        if (res.data.repeatUser) {
+          this.$message.error("账号已被注册！");
+        } else if (res.data.msg) {
+          this.$message.success("注册成功！");
+          this.$router.push("/");
+        } else if (!res.data.msg) {
+          this.$message.error("注册失败！");
+        }
       });
     }
   }
@@ -81,26 +122,42 @@
   padding: 0;
 }
 
-.login {
+.reg {
   box-sizing: border-box;
-  width: 360px;
-  height: 550px;
+  width: 390px;
+  height: 650px;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  padding: 20px 40px;
+  padding: 20px 48px;
   border-radius: 10px;
   background: rgba(255,255,255,0.7);
+  //返回login页面
+  .Tologin {
+    position: absolute;
+    left: 10px;
+    top: 12px;
+    font-size: 20px;
+    a {
+      color: #74b9ff;
+      text-decoration: none;
+      cursor: pointer;
+      &:hover {
+        color: #0984e3;
+      }
+    }
+  }
+  //标题
   h1 {
     margin: 60px 0;
     text-align: center;
+    color: #40739e;
   }
 }
-
 //input块
 .dy {
-  border-bottom: 2px solid #bdc3c7;
+  border-bottom: 1px solid #40739e;
   position: relative;
   margin: 46px 0;
 
@@ -119,7 +176,7 @@
     &::before {
       content: attr(data-placeholder);
       font-size: 18px;
-      color: #bdc3c7;
+      color: #40739e;
       position: absolute;
       left: 5px;
       top: 9px;
@@ -131,7 +188,7 @@
       content: "";
       width: 0;
       height: 2px;
-      background: linear-gradient(#3498db, #a29bfe);
+      background: linear-gradient(#74b9ff, #6c5ce7);
       position: absolute;
       left: 0;
       bottom: -2px;
@@ -147,6 +204,8 @@
 
 .f + .title::before {
   top: -17px;
+  color: #0097e6;
+  font-weight: bold;
 }
 
 //忘记密码
@@ -180,7 +239,7 @@
   color: #fff;
   margin: 15px 0;
   cursor: pointer;
-  background: linear-gradient(120deg, #74b9ff, #a29bfe, #fab1a0);
+  background: linear-gradient(120deg, #74b9ff, #a29bfe, #3dc1d3);
   background-size: 200%;
   transition: 0.4s;
 
