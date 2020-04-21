@@ -73,8 +73,8 @@
           }
           console.log(res);
         })
-        .erarr(error => {
-          error;
+        .catch(err => {
+          err;
           this.$message.error("服务器异常！");
         });
     }

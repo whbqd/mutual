@@ -115,8 +115,8 @@
             this.$message.error("注册失败！");
           }
         })
-        .erarr(error => {
-          error;
+        .catch(err => {
+          err;
           this.$message.error("服务器异常！");
         });
     }
