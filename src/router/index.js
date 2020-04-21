@@ -2,6 +2,8 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import login from "../components/login";
 import register from "../components/register";
+import checking from "../components/checking";
+import revise from "../components/revise";
 
 Vue.use(VueRouter);
 const routes = [
@@ -12,6 +14,14 @@ const routes = [
   {
     path: "/register",
     component: register
+  },
+  {
+    path: "/revise",
+    component: revise
+  },
+  {
+    path: "/checking",
+    component: checking
   }
 ];
 

@@ -1,18 +1,11 @@
 <template>
-  <div class="login animated rollIn">
-    <h1>登录</h1>
-    <!--账号-->
-    <div class="dy">
-      <input
-        :class="{ f: UserFocus || user !== '' }"
-        @blur="UserFocus = false"
-        @focus="UserFocus = true"
-        class="input"
-        type="text"
-        v-model="user"
-      />
-      <span class="title" data-placeholder="账号" />
+  <div class="revise animated bounce">
+    <div class="Toup">
+      <router-link to="/checking"
+        ><span class="el-icon-back" />previous</router-link
+      >
     </div>
+    <h1>修改</h1>
     <!--密码-->
     <div class="dy">
       <input
@@ -22,21 +15,25 @@
         class="input"
         type="password"
         v-model="password"
+        maxlength="16"
       />
       <span class="title" data-placeholder="密码" />
     </div>
-    <div class="forget"><router-link to="/checking">忘记密码？</router-link></div>
-    <!--登录-->
-    <input
-      @click="login(user, password)"
-      class="btn"
-      type="button"
-      value="登录"
-    />
-    <!--注册-->
-    <div class="register">
-      没有账号，点击注册? <router-link to="/register">注册</router-link>
+    <!--确认密码-->
+    <div class="dy">
+      <input
+        :class="{ f: RepwdFocus || Repwd !== '' }"
+        @blur="RepwdFocus = false"
+        @focus="RepwdFocus = true"
+        class="input"
+        type="password"
+        v-model="Repwd"
+        maxlength="16"
+      />
+      <span class="title" data-placeholder="确认密码" />
     </div>
+    <!--提交-->
+    <input @click="submit()" class="btn" type="button" value="SUBMIT" />
   </div>
 </template>
 
@@ -46,36 +43,45 @@
 
     export default {
   $,
-  name: "login",
+  name: "revise",
   data() {
     return {
-      UserFocus: false,
-      user: "",
+      password: "",
       PwdFocus: false,
-      password: ""
+      Repwd: "",
+      RepwdFocus: false
     };
   },
   methods: {
-    login() {
+    submit() {
+      if (this.password === "" || this.Repwd === "") {
+        this.$message.warning("密码不能为空！");
+        return false;
+      }
+      if (this.password !== this.Repwd) {
+        this.$message.error("密码不一致！");
+        return false;
+      }
       axios({
-        url: "http://localhost:8080/Backend/login",
+        url: "http://localhost:8080/Backend/revise",
         methods: "get",
         params: {
-          user: this.user,
+          user: this.$route.query.user,
           password: this.password
         }
       })
         .then(res => {
           // console.log(res);
-          if (res.data.msg === false) {
-            this.$message.error("账号或密码错误！");
+          if (res.data.msg === true) {
+            this.$message.success("修改成功!");
+            this.$router.push("/");
           } else {
-            this.$message.success("登录成功！");
+            this.$message.error("修改失败!");
           }
         })
         .catch(err => {
           err;
-          this.$message.error("服务器异常！");
+          this.$message.error("服务器异常!");
         });
     }
   }
@@ -87,29 +93,51 @@
   margin: 0;
   padding: 0;
 }
-.login {
+
+.revise {
   box-sizing: border-box;
-  width: 360px;
-  height: 550px;
+  width: 370px;
+  height: 540px;
   position: absolute;
   left: 50%;
   top: 50%;
-  margin-left: -180px;
+  margin-left: -175px;
   margin-top: -275px;
-  padding: 20px 40px;
+  padding: 20px 48px;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.7);
+  //返回login页面
+  .Toup {
+    position: absolute;
+    left: 10px;
+    top: 12px;
+    font-size: 18px;
+    a {
+      color: #ff7675;
+      text-decoration: none;
+      cursor: pointer;
+      &:hover {
+        color: #e17055;
+      }
+      span {
+        font-size: 22px;
+        position: relative;
+        top: 4px;
+      }
+    }
+  }
+  //标题
   h1 {
     margin: 60px 0;
     text-align: center;
+    color: #ff7675;
   }
 }
-
 //input块
 .dy {
-  border-bottom: 2px solid #bdc3c7;
+  border-bottom: 1px solid #ff7675;
   position: relative;
-  margin: 46px 0;
+  margin: 70px 0;
 
   .input {
     box-sizing: border-box;
@@ -126,7 +154,7 @@
     &::before {
       content: attr(data-placeholder);
       font-size: 18px;
-      color: #bdc3c7;
+      color: #ff7675;
       position: absolute;
       left: 5px;
       top: 9px;
@@ -138,7 +166,7 @@
       content: "";
       width: 0;
       height: 2px;
-      background: linear-gradient(#3498db, #a29bfe);
+      background: linear-gradient(#fab1a0, #d63031);
       position: absolute;
       left: 0;
       bottom: -2px;
@@ -153,27 +181,9 @@
 }
 
 .f + .title::before {
-  top: -17px;
-}
-
-//忘记密码
-.forget {
-  width: 100%;
-  position: relative;
-
-  a {
-    font-size: 14px;
-    color: #a29bfe;
-    position: absolute;
-    right: 0;
-    top: -20px;
-    text-decoration: none;
-    font-weight: bold;
-
-    &:hover {
-      color: #74b9ff;
-    }
-  }
+  top: -22px;
+  color: #eb4d4b;
+  font-weight: bold;
 }
 
 //登录
@@ -187,24 +197,12 @@
   color: #fff;
   margin: 15px 0;
   cursor: pointer;
-  background: linear-gradient(120deg, #74b9ff, #a29bfe, #fab1a0);
+  background: linear-gradient(120deg, #ef5777, #c04851, #ff7979);
   background-size: 200%;
   transition: 0.4s;
 
   &:hover {
     background-position: right;
-  }
-}
-
-//注册
-.register {
-  width: 100%;
-  text-align: center;
-  margin-top: 25px;
-  font-size: 14px;
-
-  a {
-    margin-left: 7px;
   }
 }
 </style>

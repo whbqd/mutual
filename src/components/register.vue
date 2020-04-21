@@ -105,7 +105,7 @@
         }
       })
         .then(res => {
-          console.log(res);
+          // console.log(res);
           if (res.data.repeatUser) {
             this.$message.error("账号已被注册！");
           } else if (res.data.msg) {
