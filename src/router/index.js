@@ -4,6 +4,7 @@ import login from "../components/login";
 import register from "../components/register";
 import checking from "../components/checking";
 import revise from "../components/revise";
+import UserAll from "../components/UserAll";
 
 Vue.use(VueRouter);
 const routes = [
@@ -22,6 +23,10 @@ const routes = [
   {
     path: "/checking",
     component: checking
+  },
+  {
+    path: "/UserAll",
+    component: UserAll
   }
 ];
 
