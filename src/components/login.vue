@@ -71,7 +71,6 @@
             this.$message.error("账号或密码错误！");
           } else {
             this.$message.success("登录成功！");
-            this.$router.push("/UserAll");
           }
         })
         .catch(err => {
