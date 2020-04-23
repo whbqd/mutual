@@ -28,7 +28,7 @@
     <div class="forget"><router-link to="/checking">忘记密码？</router-link></div>
     <!--登录-->
     <input
-      @click="login(user, password)"
+      @click="login()"
       class="btn"
       type="button"
       value="登录"
@@ -71,6 +71,7 @@
             this.$message.error("账号或密码错误！");
           } else {
             this.$message.success("登录成功！");
+            this.$router.push("/UserAll");
           }
         })
         .catch(err => {
