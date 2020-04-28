@@ -71,7 +71,7 @@
         }
       })
         .then(res => {
-          // console.log(res);
+          console.log(res);
           if (res.data.msg === true) {
             this.$message.success("修改成功!");
             this.$router.push("/");

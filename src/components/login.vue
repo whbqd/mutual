@@ -66,7 +66,7 @@
         }
       })
         .then(res => {
-          // console.log(res);
+          console.log(res);
           if (res.data.msg === false) {
             this.$message.error("账号或密码错误！");
           } else {

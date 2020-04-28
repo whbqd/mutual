@@ -86,7 +86,7 @@
 
 <style lang="scss" scoped>
 .UserAll {
-  width: 1000px;
+  width: 900px;
   margin: 0 auto;
   position: absolute;
   left: 50%;
