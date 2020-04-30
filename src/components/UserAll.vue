@@ -60,7 +60,7 @@
     },
     cutout(id) {
       axios({
-        url: "http://47.102.223.209:8080/Login/UserAll",
+        url: "http://47.102.223.209:8080/Login/delete",
         methods: "get",
         params: {
           id

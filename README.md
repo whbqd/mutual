@@ -96,5 +96,14 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 *   msg => 查询状态码
 * }
 
+### 删除api
+* url: http://47.102.223.209:8080/Login/delete
+* 请求方式 get  post
+* 请求参数  id
+* 返回值 {
+*   msg => 删除状态码
+* }
+
+
 
 
