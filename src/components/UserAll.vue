@@ -46,7 +46,7 @@
   methods: {
     getData() {
       axios({
-        url: "http://localhost:8080/Backend/UserAll",
+        url: "http://47.102.223.209:8080/Login/UserAll",
         methods: "get"
       })
         .then(res => {
