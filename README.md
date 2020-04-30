@@ -24,6 +24,7 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### 登录 API
+```
 * url:  http://47.102.223.209:8080/Login/login
 * 请求方式  ： get post
 * 请求参数 : {
@@ -38,9 +39,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 *               token
 *           }
 * }
-
-
+```
 ### 注册api
+```
 * url:  http://47.102.223.209:8080/Login/register
 *请求方式  get,post
 *请求参数 {
@@ -57,10 +58,11 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 * }
 * 返回格式  json
 * */
-
+```
 
 
 ### 判断用户名及邮箱Api
+```
 *url:   http://47.102.223.209:8080/Login/checking
 *请求方式  get,post
 *请求参数 {
@@ -72,9 +74,11 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 *   email,
 *   msg => 判断状态码
 * }
-
+```
 
 ### 修改api
+```
+
 * url:    http://47.102.223.209:8080/Login/revise
 * 请求方式 get,post
 * 请求参数 {
@@ -86,8 +90,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 *   password,
 *   msg => 修改状态码
 * }
-
+```
 ### 查询全部信息api
+```
 * url:  http://47.102.223.209:8080/Login/UserAll
 * 请求方式： get, post
 * 请求参数： null
@@ -95,8 +100,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 *   userList => 查询结果对象
 *   msg => 查询状态码
 * }
-
+```
 ### 删除api
+```
 * url: http://47.102.223.209:8080/Login/delete
 * 请求方式 get  post
 * 请求参数  id
@@ -104,6 +110,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 *   msg => 删除状态码
 * }
 
-
+```
 
 
