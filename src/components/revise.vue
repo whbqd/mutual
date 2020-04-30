@@ -63,7 +63,7 @@
         return false;
       }
       axios({
-        url: "http://localhost:8080/Backend/revise",
+        url: "http://47.102.223.209:8080/Login/revise",
         methods: "get",
         params: {
           user: this.$route.query.user,

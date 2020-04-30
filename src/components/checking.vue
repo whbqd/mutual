@@ -61,7 +61,7 @@
         return false;
       }
       axios({
-        url: "http://localhost:8080/Backend/checking",
+        url: "http://47.102.223.209:8080/Login/checking",
         methods: "get",
         params: {
           user: this.user,

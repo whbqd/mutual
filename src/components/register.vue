@@ -96,7 +96,7 @@
         return false;
       }
       axios({
-        url: "http://localhost:8080/Backend/register",
+        url: "http://47.102.223.209:8080/Login/register",
         methods: "get",
         params: {
           user: this.user,

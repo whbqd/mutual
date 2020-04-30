@@ -58,7 +58,7 @@
   methods: {
     login() {
       axios({
-        url: "http://localhost:8080/Backend/login",
+        url: "http://47.102.223.209:8080/Login/login",
         methods: "get",
         params: {
           user: this.user,
