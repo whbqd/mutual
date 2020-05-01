@@ -58,12 +58,12 @@
   methods: {
     login() {
       axios({
-        url: "http://47.102.223.209:8080/Login/login",
-        methods: "get",
-        params: {
-          user: this.user,
-          password: this.password
-        }
+          url: "https://47.102.223.209:8080/Login/login",
+          methods: "get",
+          params: {
+              user: this.user,
+              password: this.password
+          }
       })
         .then(res => {
           console.log(res);
