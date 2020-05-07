@@ -96,16 +96,17 @@
         return false;
       }
       axios({
-        url: "http://47.102.223.209:8080/Login/register",
-        methods: "get",
-        params: {
-          user: this.user,
-          password: this.password,
-          email: this.email
-        }
+          url: "https://www.whbqd.xyz/Login/register",
+          methods: "get",
+          params: {
+              user: this.user,
+              password: this.password,
+              email: this.email
+          }
       })
         .then(res => {
-          console.log(res);
+            console.log("#register ▼");
+            console.log(res);
           if (res.data.repeatUser) {
             this.$message.error("账号已被注册！");
           } else if (res.data.msg) {

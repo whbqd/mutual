@@ -1,17 +1,17 @@
 <template>
   <div class="UserAll">
-    <h1>DATA</h1>
-    <table class="el-table User" v-if="UserList.length !== 0">
+    <h1 class="animated flipInX">DATA</h1>
+    <table class="el-table User animated lightSpeedIn" v-if="UserList.length !== 0">
       <thead>
-        <td>index</td>
-        <td>id</td>
-        <td>name</td>
-        <td>password</td>
-        <td>email</td>
-        <td>DELETE</td>
+      <td>index</td>
+      <td>id</td>
+      <td>name</td>
+      <td>password</td>
+      <td>email</td>
+      <td>DELETE</td>
       </thead>
       <tbody>
-        <tr v-for="(items, index) in UserList" :key="index" class="UserData">
+      <tr v-for="(items, index) in UserList" :key="index" class="UserData">
           <td>{{ index + 1 }}</td>
           <td>{{ items.id }}</td>
           <td>{{ items.user }}</td>
@@ -46,12 +46,13 @@
   methods: {
     getData() {
       axios({
-        url: "http://47.102.223.209:8080/Login/UserAll",
-        methods: "get"
+          url: "https://www.whbqd.xyz/Login/UserAll",
+          methods: "get"
       })
         .then(res => {
-          console.log("#", res);
-          this.UserList = res.data.userList;
+            console.log("#UserAll ▼");
+            console.log(res);
+            this.UserList = res.data.userList;
         })
         .catch(err => {
           err;
@@ -60,11 +61,11 @@
     },
     cutout(id) {
       axios({
-        url: "http://47.102.223.209:8080/Login/delete",
-        methods: "get",
-        params: {
-          id
-        }
+          url: "https://www.whbqd.xyz/Login/delete",
+          methods: "get",
+          params: {
+              id
+          }
       })
         .then(res => {
           console.log("respID", res);

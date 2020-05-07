@@ -61,15 +61,16 @@
         return false;
       }
       axios({
-        url: "http://47.102.223.209:8080/Login/checking",
-        methods: "get",
-        params: {
-          user: this.user,
-          email: this.email
-        }
+          url: "https://www.whbqd.xyz/Login/checking",
+          methods: "get",
+          params: {
+              user: this.user,
+              email: this.email
+          }
       })
         .then(res => {
-          console.log(res);
+            console.log("#checking ▼")
+            console.log(res);
           if (res.data.msg === false) {
             this.$message.error("账号或邮箱错误!");
             return false;

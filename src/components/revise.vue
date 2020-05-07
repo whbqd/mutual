@@ -63,15 +63,16 @@
         return false;
       }
       axios({
-        url: "http://47.102.223.209:8080/Login/revise",
-        methods: "get",
-        params: {
-          user: this.$route.query.user,
-          password: this.password
-        }
+          url: "https://www.whbqd.xyz/Login/revise",
+          methods: "get",
+          params: {
+              user: this.$route.query.user,
+              password: this.password
+          }
       })
         .then(res => {
-          console.log(res);
+            console.log("#revise ▼");
+            console.log(res);
           if (res.data.msg === true) {
             this.$message.success("修改成功!");
             this.$router.push("/");

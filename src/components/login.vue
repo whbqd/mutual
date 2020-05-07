@@ -16,26 +16,29 @@
     <!--密码-->
     <div class="dy">
       <input
-        :class="{ f: PwdFocus || password !== '' }"
-        @blur="PwdFocus = false"
-        @focus="PwdFocus = true"
-        class="input"
-        type="password"
-        v-model="password"
+              :class="{ f: PwdFocus || password !== '' }"
+              @blur="PwdFocus = false"
+              @focus="PwdFocus = true"
+              class="input"
+              type="password"
+              v-model="password"
       />
-      <span class="title" data-placeholder="密码" />
+      <span class="title" data-placeholder="密码"/>
     </div>
-    <div class="forget"><router-link to="/checking">忘记密码？</router-link></div>
+    <div class="forget">
+      <router-link to="/checking">忘记密码？</router-link>
+    </div>
     <!--登录-->
     <input
-      @click="login()"
-      class="btn"
-      type="button"
-      value="登录"
+            @click="login()"
+            class="btn"
+            type="button"
+            value="登录"
     />
     <!--注册-->
     <div class="register">
-      没有账号，点击注册? <router-link to="/register">注册</router-link>
+      没有账号，点击注册?
+      <router-link to="/register">注册</router-link>
     </div>
   </div>
 </template>
@@ -58,7 +61,7 @@
   methods: {
     login() {
       axios({
-          url: "https://47.102.223.209:8080/Login/login",
+          url: "https://www.whbqd.xyz/Login/login",
           methods: "get",
           params: {
               user: this.user,
@@ -66,12 +69,13 @@
           }
       })
         .then(res => {
-          console.log(res);
+            console.log("#login ▼");
+            console.log(res);
           if (res.data.msg === false) {
             this.$message.error("账号或密码错误！");
           } else {
-            this.$message.success("登录成功！");
-            this.$router.push("/UserAll");
+              this.$message.success("登录成功！");
+              this.$router.push(`/UserAll?token=${res.data.token}`);
           }
         })
         .catch(err => {
