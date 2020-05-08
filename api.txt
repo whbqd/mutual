@@ -1,6 +1,6 @@
 ### 登录 API
 ```
-* url:  http://47.102.223.209:8080/Login/login
+* url:  https://www.whbqd.xyz/Login/login
 * 请求方式  ： get post
 * 请求参数 : {
 * user => 用户名 ,
@@ -17,7 +17,7 @@
 ```
 ### 注册api
 ```
-* url:  http://47.102.223.209:8080/Login/register
+* url:  https://www.whbqd.xyz/Login/register
 *请求方式  get,post
 *请求参数 {
 *   user,
@@ -38,7 +38,7 @@
 
 ### 判断用户名及邮箱Api
 ```
-*url:   http://47.102.223.209:8080/Login/checking
+*url:   https://www.whbqd.xyz/Login/checking
 *请求方式  get,post
 *请求参数 {
 *   user,
@@ -54,7 +54,7 @@
 ### 修改api
 ```
 
-* url:    http://47.102.223.209:8080/Login/revise
+* url:    https://www.whbqd.xyz/Login/revise
 * 请求方式 get,post
 * 请求参数 {
 *   user,
@@ -68,7 +68,7 @@
 ```
 ### 查询全部信息api
 ```
-* url:  http://47.102.223.209:8080/Login/UserAll
+* url:  https://www.whbqd.xyz/Login/UserAll
 * 请求方式： get, post
 * 请求参数： null
 * 返回值： {
@@ -78,7 +78,7 @@
 ```
 ### 删除api
 ```
-* url: http://47.102.223.209:8080/Login/delete
+* url: https://www.whbqd.xyz/Login/delete
 * 请求方式 get  post
 * 请求参数  id
 * 返回值 {
