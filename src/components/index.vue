@@ -23,13 +23,13 @@
               <span class="gn1Icon2 el-icon-arrow-down"></span>
             </li>
             <li class="li2" @click="setName('Table')">
-              <router-link to="/index/Table">Table</router-link>
+              <router-link to="/index/Table" class="tb">Table</router-link>
             </li>
             <li class="li2" @click="setName('From')">
-              <router-link to="/index/From">From</router-link>
+              <router-link to="/index/From" class="tb">From</router-link>
             </li>
             <li class="li2" @click="setName('列表')">
-              <router-link to="/index/List">列表</router-link>
+              <router-link to="/index/List" class="tb">列表</router-link>
             </li>
           </ul>
 
@@ -233,6 +233,10 @@ export default {
             /*li的选中状态*/
             .router-link-active {
               color: #7d5fff;
+            }
+            .tb {
+              display: inline-block;
+              width: 100%;
             }
           }
 
