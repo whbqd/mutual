@@ -52,7 +52,7 @@
         <span><i>*</i> 用户名</span>
         <el-input
           class="inputV"
-          placeholder="请输入内容"
+          :placeholder="oneUserList.user"
           v-model="user"
           clearable
         >
@@ -62,7 +62,7 @@
         <span><i>*</i> 密码</span>
         <el-input
           class="inputV"
-          placeholder="请输入密码"
+          :placeholder="oneUserList.password"
           v-model="password"
           show-password
         ></el-input>
@@ -71,7 +71,7 @@
         <span><i>*</i> 邮箱</span>
         <el-input
           class="inputV"
-          placeholder="请输入内容"
+          :placeholder="oneUserList.email"
           v-model="email"
           clearable
         >
@@ -102,7 +102,9 @@ export default {
       password: "",
       // 邮箱
       email: "",
-      isDisabled: false
+      isDisabled: false,
+      //点击编辑的单用户数组
+      oneUserList: []
     };
   },
   created() {
@@ -165,6 +167,21 @@ export default {
     revise(id) {
       $(".modify").fadeToggle(300);
       this.id = id;
+      axios({
+        url: "https://www.whbqd.xyz/Login/idAll",
+        methods: "post",
+        params: {
+          id
+        }
+      })
+        .then(res => {
+          console.log(res);
+          this.oneUserList = res.data;
+        })
+        .catch(err => {
+          console.log(err);
+          this.$message.error("服务器超时！");
+        });
     },
     // 取消
     CallOff() {
@@ -220,7 +237,6 @@ export default {
         }
       }
     }
-
   }
   /*修改界面*/
   .modify {
