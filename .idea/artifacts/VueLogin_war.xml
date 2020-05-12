@@ -1,9 +1,8 @@
 <component name="ArtifactManager">
-  <artifact type="war" build-on-make="true" name="VueLogin:war">
+  <artifact type="war" name="VueLogin:war">
     <output-path>$PROJECT_DIR$/out/artifacts/VueLogin_war</output-path>
     <root id="archive" name="VueLogin_war.war">
       <element id="artifact" artifact-name="VueLogin:war exploded" />
-      <element id="dir-copy" path="$PROJECT_DIR$/web" />
     </root>
   </artifact>
 </component>

@@ -7,25 +7,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9743cd0a-d7af-42ed-a767-7a5db7490fd1" name="默认更改列表" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/zt/servlet/idAll.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/zt/servlet/reviseByid.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/VueLogin_war.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/VueLogin_war.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VueLogin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/VueLogin.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/VueLogin_war/VueLogin_war.war" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/VueLogin_war/VueLogin_war.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/VueLogin_war_exploded/WEB-INF/classes/com/zt/dao/Dao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/VueLogin_war_exploded/WEB-INF/classes/com/zt/dao/Dao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/VueLogin_war_exploded/WEB-INF/classes/com/zt/daoImp/DaoImp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/VueLogin_war_exploded/WEB-INF/classes/com/zt/daoImp/DaoImp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/VueLogin_war_exploded/WEB-INF/classes/com/zt/service/Service.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/VueLogin_war_exploded/WEB-INF/classes/com/zt/service/Service.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/VueLogin_war_exploded/WEB-INF/classes/com/zt/serviceImp/ServiceImp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/VueLogin_war_exploded/WEB-INF/classes/com/zt/serviceImp/ServiceImp.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/VueLogin_war_exploded/WEB-INF/classes/jdbc/Jdbc.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/VueLogin_war_exploded/WEB-INF/classes/jdbc/Jdbc.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/VueLogin_war_exploded/WEB-INF/lib/mysql-connector-java-8.0.20.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zt/dao/Dao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/zt/dao/Dao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zt/daoImp/DaoImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/zt/daoImp/DaoImp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zt/service/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/zt/service/Service.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zt/serviceImp/ServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/zt/serviceImp/ServiceImp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/com/zt/dao/Dao.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/com/zt/dao/Dao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/com/zt/daoImp/DaoImp.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/com/zt/daoImp/DaoImp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/com/zt/service/Service.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/com/zt/service/Service.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/com/zt/serviceImp/ServiceImp.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/com/zt/serviceImp/ServiceImp.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/jdbc/Jdbc.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/jdbc/Jdbc.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,7 +66,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/web/WEB-INF/lib" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -93,6 +83,7 @@
       <recent name="D:\Java\VueLogin\web\WEB-INF" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Java\VueLogin" />
       <recent name="D:\Java\VueLogin\web\WEB-INF\lib" />
     </key>
   </component>
@@ -262,12 +253,24 @@
       <workItem from="1588142490781" duration="881000" />
       <workItem from="1588252964180" duration="7457000" />
       <workItem from="1588262518683" duration="1565000" />
-      <workItem from="1589267636308" duration="3514000" />
+      <workItem from="1589267636308" duration="4675000" />
     </task>
+    <task id="LOCAL-00001" summary="用户修改">
+      <created>1589271237359</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1589271237359</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="用户修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="用户修改" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="74" key="#Inspections" timestamp="1587273023260">
@@ -298,10 +301,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="74" key="#项目结构/0.0.1536.824@0.0.1536.824" timestamp="1587271796694" />
-    <state x="399" y="8" key="CommitChangelistDialog2" timestamp="1589271164544">
+    <state x="399" y="8" key="CommitChangelistDialog2" timestamp="1589271235684">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="399" y="8" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1589271164544" />
+    <state x="399" y="8" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1589271235684" />
     <state x="682" y="211" key="FileChooserDialogImpl" timestamp="1588266920398">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -354,14 +357,18 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1024" height="352" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1589271140463" />
-    <state x="212" y="0" width="1038" height="821" key="SettingsEditor" timestamp="1588266923349">
+    <state x="212" y="0" width="1038" height="821" key="SettingsEditor" timestamp="1589271335875">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="212" y="0" width="1038" height="821" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1588266923349" />
+    <state x="212" y="0" width="1038" height="821" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1589271335875" />
     <state x="490" y="154" width="540" height="524" key="StructurePopup" timestamp="1587272659571">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="490" y="154" width="540" height="524" key="StructurePopup/0.0.1536.824@0.0.1536.824" timestamp="1587272659571" />
+    <state x="361" y="136" key="Vcs.Push.Dialog.v2" timestamp="1589271239819">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="136" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1589271239819" />
     <state x="479" y="240" key="com.intellij.ide.util.TipDialog" timestamp="1587734494211">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
