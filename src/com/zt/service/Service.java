@@ -24,5 +24,8 @@ public interface Service {
     boolean judgeUser (String user);
     //判断账号,邮箱正误
     boolean judgeEmail (String user, String email);
+    //    通过id获取所有值
+    User getIdByUser(int id);
 
+    int setIdByData(User user);
 }

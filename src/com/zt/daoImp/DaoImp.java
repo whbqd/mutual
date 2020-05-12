@@ -139,4 +139,45 @@ public class DaoImp implements Dao {
         }
         return false;
     }
+
+    @Override
+    public User getIdByUser(int id) {
+        String sql = "select * from user where id = ?";
+        conn = Jdbc.getConn();
+        User user = null;
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            set = stmt.executeQuery();
+            if (set.next()){
+                int Id = set.getInt("id");
+                String u = set.getString("user");
+                String password = set.getString("password");
+                String email = set.getString("email");
+                user = new User(Id, u, password, email);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    @Override
+    public int setIdByData(User user) {
+        String sql = "update user set user = ?, password = ?, email = ? where id = ?";
+        int flag = 0;
+        conn = Jdbc.getConn();
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, user.getUser());
+            stmt.setString(2, user.getPassword());
+            stmt.setString(3, user.getEmail());
+            stmt.setInt(4, user.getId());
+            flag = stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
 }

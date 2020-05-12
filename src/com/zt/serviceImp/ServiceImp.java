@@ -46,4 +46,14 @@ public class ServiceImp implements Service {
     public boolean judgeEmail(String user, String email) {
         return dao.judgeEmail(user, email);
     }
+
+    @Override
+    public User getIdByUser(int id) {
+        return dao.getIdByUser(id);
+    }
+
+    @Override
+    public int setIdByData(User user) {
+        return dao.setIdByData(user);
+    }
 }
