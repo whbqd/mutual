@@ -34,7 +34,7 @@
                 class="update"
                 type="primary"
                 icon="el-icon-edit"
-                @click="revise(items.id)"
+                @click="reviseClick(items.id)"
               ></el-button>
             </td>
           </tr>
@@ -80,7 +80,9 @@
       <!--底部按钮-->
       <div class="submit">
         <el-button @click="CallOff()" class="qx">取消</el-button>
-        <el-button type="primary" class="xg">修改</el-button>
+        <el-button type="primary" class="xg" @click="revise(id)"
+          >修改</el-button
+        >
       </div>
     </div>
   </div>
@@ -164,7 +166,7 @@ export default {
         });
     },
     // 修改
-    revise(id) {
+    reviseClick(id) {
       $(".modify").fadeToggle(300);
       this.id = id;
       axios({
@@ -189,6 +191,43 @@ export default {
       this.password = "";
       this.email = "";
       $(".modify").fadeToggle(300);
+    },
+    //确认
+    revise(id) {
+      if (this.user === "" || this.password === "" || this.email === "") {
+        this.$message({
+          type: "warning",
+          showClose: true,
+          message: "信息不全!!!"
+        });
+        return false;
+      }
+      // 修改 信息
+      axios({
+        url: "https://www.whbqd.xyz/Login/reviseByid",
+        methods: "post",
+        params: {
+          id,
+          user: this.user,
+          password: this.password,
+          email: this.email
+        }
+      })
+        .then(res => {
+          console.log(res);
+          if (res.data) {
+            this.$message.success("修改成功!");
+            $(".modify").fadeToggle(300);
+            this.getUserAll();
+            this.user = "";
+            this.password = "";
+            this.email = "";
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          this.$message.error("服务器超时！");
+        });
     }
   }
 };
@@ -206,6 +245,10 @@ export default {
   position: relative;
   /*表格div*/
   .user {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 595px;
+    &::-webkit-scrollbar {display:none}
     /*表格*/
     .tableUser {
       border-radius: 4px;
