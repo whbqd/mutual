@@ -69,7 +69,7 @@ public class JdbcController {
     /**
      * 删除
      * @param id 删除条件
-     * @return  受影响行数
+     * @return
      */
     @RequestMapping("/del")
     public int del(int id) {
