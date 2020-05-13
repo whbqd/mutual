@@ -9,6 +9,7 @@ import index from "../components/index";
 import Table from "../views/Table";
 import From from "../views/From";
 import List from "../views/List";
+import Homepage from "../views/Homepage";
 Vue.use(VueRouter);
 const routes = [
   {
@@ -51,6 +52,10 @@ const routes = [
       {
         path: "/index/List",
         component: List
+      },
+      {
+        path: "/index/Homepage",
+        component: Homepage
       }
     ]
   }

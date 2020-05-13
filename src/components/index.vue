@@ -15,6 +15,12 @@
     <div class="container">
       <!--左侧-->
       <div class="left">
+        <!--个人主页-->
+        <div class="homepage" @click="setName('个人主页')">
+          <router-link to="/index/Homepage" class="Personal"
+            ><span class="el-icon-s-custom icon" /> 个人主页</router-link
+          >
+        </div>
         <!--功能区1-->
         <div class="t1">
           <ul class="gn">
@@ -179,6 +185,32 @@ export default {
     .left {
       background-color: #1e272e;
       width: 160px;
+      /*个人主页*/
+      .homepage {
+        width: 100%;
+        height: 25px;
+        line-height: 25px;
+        margin: 20px 0;
+        text-align: center;
+        box-sizing: border-box;
+        /*文字*/
+        .Personal {
+          display: inline-block;
+          width: 100%;
+          position: relative;
+          left: -8px;
+          font-size: 15px;
+          /*图标*/
+          .icon {
+            font-size: 18px;
+            position: relative;
+            left: 1px;
+          }
+        }
+        .router-link-active {
+          color: #7d5fff;
+        }
+      }
       /*功能区1*/
       .t1 {
         width: 160px;
