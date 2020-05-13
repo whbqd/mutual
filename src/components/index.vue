@@ -16,7 +16,7 @@
       <!--左侧-->
       <div class="left">
         <!--个人主页-->
-        <div class="homepage" @click="setName('个人主页')">
+        <div class="homepage">
           <router-link to="/index/Homepage" class="Personal"
             ><span class="el-icon-s-custom icon" /> 个人主页</router-link
           >
@@ -28,13 +28,13 @@
               <span class="gn1Icon1 el-icon-menu"></span>功能区1
               <span class="gn1Icon2 el-icon-arrow-down"></span>
             </li>
-            <li class="li2" @click="setName('Table')">
+            <li class="li2">
               <router-link to="/index/Table" class="tb">Table</router-link>
             </li>
-            <li class="li2" @click="setName('From')">
+            <li class="li2">
               <router-link to="/index/From" class="tb">From</router-link>
             </li>
-            <li class="li2" @click="setName('列表')">
+            <li class="li2">
               <router-link to="/index/List" class="tb">列表</router-link>
             </li>
           </ul>
@@ -47,13 +47,13 @@
               <span class="gn2Icon1 el-icon-s-data"></span>功能区2
               <span class="gn2Icon2 el-icon-arrow-down"></span>
             </li>
-            <li class="gn2li2" @click="setName('组件1')">
+            <li class="gn2li2">
               <router-link to="####">组件1</router-link>
             </li>
-            <li class="gn2li2" @click="setName('组件2')">
+            <li class="gn2li2">
               <router-link to="#####">组件2</router-link>
             </li>
-            <li class="gn2li2" @click="setName('组件3')">
+            <li class="gn2li2">
               <router-link to="######">组件3</router-link>
             </li>
           </ul>
@@ -61,7 +61,6 @@
       </div>
       <!--右侧主体-->
       <div class="main">
-        <h3 class="ComName">{{ name }}</h3>
         <router-view></router-view>
       </div>
     </div>
@@ -76,8 +75,6 @@ export default {
       // 功能1与2的点击图标转换判断
       gn1n: true,
       gn2n: true,
-      // 功能名称
-      name: "",
       // 用户名
       UserName: ""
     };
@@ -110,10 +107,6 @@ export default {
         $(".gn2Icon2").addClass("el-icon-arrow-down");
         this.gn2n = true;
       }
-    },
-    // 点击功能名称
-    setName(name) {
-      this.name = name;
     },
     // 退出登录点击事件
     outLogin() {

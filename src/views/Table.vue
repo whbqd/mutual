@@ -1,5 +1,6 @@
 <template>
   <div class="Table">
+    <h3 class="title">Table</h3>
     <div class="user">
       <table class="el-table tableUser">
         <thead>
@@ -243,25 +244,41 @@ export default {
   padding: 10px;
   height: 668px;
   position: relative;
+  /*标题*/
+  .title {
+    border-left: 4px solid #353b48;
+    color: #2f3640;
+    height: 20px;
+    line-height: 20px;
+    margin-bottom: 10px;
+    padding-left: 3px;
+  }
   /*表格div*/
   .user {
     overflow-x: hidden;
     overflow-y: auto;
     height: 595px;
-    &::-webkit-scrollbar {display:none}
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
     /*表格*/
     .tableUser {
       border-radius: 4px;
       box-shadow: 0 0 15px #57606f;
+
       td {
         text-align: center;
       }
+
       /*删除标志*/
       .del {
         width: 55px;
         height: 39px;
         background-color: #2d3436;
         border-color: #2d3436;
+
         &:hover {
           background-color: #57606f;
           border-color: #57606f;
@@ -274,6 +291,7 @@ export default {
         height: 39px;
         background-color: #2d3436;
         border-color: #2d3436;
+
         &:hover {
           background-color: #57606f;
           border-color: #57606f;
@@ -281,6 +299,7 @@ export default {
       }
     }
   }
+
   /*修改界面*/
   .modify {
     display: none;
@@ -306,6 +325,7 @@ export default {
       border-left: 4px solid #2d3436;
       padding-left: 5px;
     }
+
     /*id标识*/
     .foot {
       position: absolute;
@@ -315,6 +335,7 @@ export default {
       line-height: 20px;
       color: #57606f;
     }
+
     //行输入块
     .ite {
       height: 80px;
@@ -341,6 +362,7 @@ export default {
       position: absolute;
       right: 50px;
       bottom: 30px;
+
       .qx,
       .xg {
         width: 70px;

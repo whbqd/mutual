@@ -1,5 +1,7 @@
 <template>
   <div class="Homepage">
+    <!--标题-->
+    <h3 class="title">个人主页</h3>
     <!--个人标语-->
     <div class="top">
       <!--左侧图片+标语-->
@@ -39,15 +41,23 @@ export default {
 <style lang="scss" scoped>
 /*个人主页*/
 .Homepage {
-  padding: 15px 9px 0;
-
+  padding: 0 9px 0;
+  /*标题*/
+  .title {
+    border-left: 4px solid #353b48;
+    color: #2f3640;
+    height: 20px;
+    line-height: 20px;
+    margin-bottom: 10px;
+    padding-left: 3px;
+  }
   /*个人标语块*/
   .top {
     width: 100%;
     height: 150px;
     background-color: #2f3640;
     border-radius: 3px;
-      display: flex;
+    display: flex;
     position: relative;
     /*左侧标语*/
     .leftpage {
