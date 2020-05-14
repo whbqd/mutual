@@ -284,7 +284,7 @@ export default {
     }
     /*右侧主体*/
     .main {
-      background-color: #7f8fa6;
+      background-color: #576574;
       flex: 1;
       /*组件名称*/
       .ComName {
