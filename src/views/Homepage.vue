@@ -52,14 +52,20 @@
           <td class="br l1t2d">
             <div class="item">
               <div class="itemTop">
-                <img src="../assets/json.png" alt="" />
-                <span>Json</span>
+                <img src="../assets/wyy.png" alt="" />
+                <span>网易云</span>
               </div>
               <div class="itemBottom">
-                <span
-                  >音乐播放器 - 网易云Api。用音乐歌唱青春,用心灵创造生活</span
+                <span>非cli项目，播放器, 天气预报</span>
+                <a
+                  href="https://www.whbqd.xyz/vue"
+                  target="_blank"
+                  style="right: 50px"
+                  >music></a
                 >
-                <a href="https://www.whbqd.xyz/player" target="_blank">详情></a>
+                <a href="https://www.whbqd.xyz/vue/weather.html" target="_blank"
+                  >天气></a
+                >
               </div>
             </div>
           </td>
@@ -74,10 +80,8 @@
                 <span>GitHub</span>
               </div>
               <div class="itemBottom">
-                <span
-                  >Java前后端分离源码</span
-                >
-                <a href="https://www.whbqd.xyz/player" target="_blank">详情></a>
+                <span>Java前后端分离源码</span>
+                <a href="https://github.com/whbqd/mutual/tree/Api" target="_blank">详情></a>
               </div>
             </div>
           </td>
@@ -89,9 +93,7 @@
                 <span>login</span>
               </div>
               <div class="itemBottom">
-                <span
-                  >用户登录 - 前后端分离。</span
-                >
+                <span>用户登录 - 前后端分离。</span>
                 <a href="https://www.whbqd.xyz/login" target="_blank">详情></a>
               </div>
             </div>
