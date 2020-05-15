@@ -81,7 +81,11 @@
               </div>
               <div class="itemBottom">
                 <span>Java前后端分离源码</span>
-                <a href="https://github.com/whbqd/mutual/tree/Api" target="_blank">详情></a>
+                <a
+                  href="https://github.com/whbqd/mutual/tree/Api"
+                  target="_blank"
+                  >详情></a
+                >
               </div>
             </div>
           </td>
