@@ -4,6 +4,7 @@
     <h3 class="title">表单</h3>
     <!--表单-->
     <div class="From_box">
+      <h2>用户名XX</h2>
       <el-form ref="form" :model="form" label-width="80px" class="From_el">
         <el-form-item label="姓名">
           <el-input v-model="form.name" class="form_input"></el-input>
@@ -23,10 +24,10 @@
         <el-form-item label="出生年月">
           <el-col :span="11">
             <el-date-picker
-                type="date"
-                placeholder="选择日期"
-                style="width: 100%;"
-                v-model="form.date"
+              type="date"
+              placeholder="选择日期"
+              style="width: 100%;"
+              v-model="form.date"
             ></el-date-picker>
           </el-col>
         </el-form-item>
@@ -39,7 +40,11 @@
           </el-checkbox-group>
         </el-form-item>
         <el-form-item label="地址">
-          <el-input type="textarea" v-model="form.desc" style="width: 71%"></el-input>
+          <el-input
+            type="textarea"
+            v-model="form.desc"
+            style="width: 71%"
+          ></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">立即完善</el-button>
@@ -47,22 +52,31 @@
         </el-form-item>
       </el-form>
     </div>
-
   </div>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            form: {
-
-                //优势  复选框
-                type: [],
-                sex: "男"
-            }
-        }
-    }
+  data() {
+    return {
+      form: {
+        // 姓名
+        name: "",
+        // 性别
+        sex: "男",
+        // 年龄
+        age: "",
+        // 联系电话
+        tel: "",
+        // 出生年月
+        date: "",
+        //优势
+        type: [],
+        // 地址
+        desc: ""
+      }
+    };
+  }
 };
 </script>
 
@@ -96,7 +110,6 @@ export default {
         width: 100%;
       }
     }
-
   }
 }
 </style>

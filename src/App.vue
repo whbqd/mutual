@@ -13,10 +13,13 @@
 export default {};
 </script>
 <style lang="scss">
+  #app {
+    height: 100%;
+  }
 .record {
   width: 400px;
   position: absolute;
-  bottom: 0;
+  bottom: -5%;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
