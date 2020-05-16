@@ -42,6 +42,10 @@ const routes = [
     // Ç¶Ì×Â·ÓÉ
     children: [
       {
+        path: "/index",
+        component: Homepage
+      },
+      {
         path: "/index/Table",
         component: Table
       },

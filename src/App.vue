@@ -16,7 +16,7 @@ export default {};
 .record {
   width: 400px;
   position: absolute;
-  bottom: 1%;
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;

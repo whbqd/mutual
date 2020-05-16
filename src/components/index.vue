@@ -122,7 +122,7 @@ export default {
   text-decoration: none;
 }
 .index {
-  height: 700px;
+  height: 100%;
   box-sizing: border-box;
   /*上*/
   .top {

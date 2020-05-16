@@ -242,7 +242,7 @@ export default {
 .Table {
   box-sizing: border-box;
   padding: 10px;
-  height: 668px;
+  height: 100%;
   position: relative;
   /*标题*/
   .title {
@@ -257,8 +257,7 @@ export default {
   .user {
     overflow-x: hidden;
     overflow-y: auto;
-    height: 595px;
-
+    height: 95%;
     &::-webkit-scrollbar {
       display: none;
     }
