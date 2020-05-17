@@ -38,7 +38,6 @@
               <router-link to="/index/List" class="tb">列表</router-link>
             </li>
           </ul>
-
         </div>
         <!-- 功能区2 -->
         <div class="t1">
@@ -110,6 +109,9 @@ export default {
     },
     // 退出登录点击事件
     outLogin() {
+      // 清空token
+      window.sessionStorage.clear();
+      // 跳转到登录页
       this.$router.push("/login");
     }
   }
