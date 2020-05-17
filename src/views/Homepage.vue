@@ -10,7 +10,7 @@
         <img src="../assets/default_colleagues.jpg" alt="" />
         <!--标语-->
         <div class="wzright">
-          <p>上午好, XXX, 准备吃什么呢?</p>
+          <p>上午好, {{ username }}, 准备吃什么呢?</p>
           <span>前端工程师 | 某某某事业群 • VUE平台</span>
         </div>
       </div>
@@ -109,7 +109,12 @@
 </template>
 <script>
 export default {
-  name: "Homepage"
+  name: "Homepage",
+  data() {
+    return {
+      username: window.sessionStorage.getItem("username")
+    };
+  }
 };
 </script>
 

@@ -80,7 +80,7 @@ export default {
     };
   },
   created() {
-    this.UserName = this.$route.query.username;
+    this.UserName = window.sessionStorage.getItem("username");
   },
   methods: {
     // 功能1与2的下拉效果及图标转换

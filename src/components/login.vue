@@ -16,25 +16,20 @@
     <!--密码-->
     <div class="dy">
       <input
-              :class="{ f: PwdFocus || password !== '' }"
-              @blur="PwdFocus = false"
-              @focus="PwdFocus = true"
-              class="input"
-              type="password"
-              v-model="password"
+        :class="{ f: PwdFocus || password !== '' }"
+        @blur="PwdFocus = false"
+        @focus="PwdFocus = true"
+        class="input"
+        type="password"
+        v-model="password"
       />
-      <span class="title" data-placeholder="密码"/>
+      <span class="title" data-placeholder="密码" />
     </div>
     <div class="forget">
       <router-link to="/checking">忘记密码？</router-link>
     </div>
     <!--登录-->
-    <input
-            @click="login()"
-            class="btn"
-            type="button"
-            value="登录"
-    />
+    <input @click="login()" class="btn" type="button" value="登录" />
     <!--注册-->
     <div class="register">
       没有账号，点击注册?
@@ -44,10 +39,10 @@
 </template>
 
 <script>
-    import axios from "axios";
-    import $ from "animate.css";
+import axios from "axios";
+import $ from "animate.css";
 
-    export default {
+export default {
   $,
   name: "login",
   data() {
@@ -61,21 +56,23 @@
   methods: {
     login() {
       axios({
-          url: "https://www.whbqd.xyz/Login/login",
-          methods: "get",
-          params: {
-              user: this.user,
-              password: this.password
-          }
+        url: "https://www.whbqd.xyz/Login/login",
+        methods: "get",
+        params: {
+          user: this.user,
+          password: this.password
+        }
       })
         .then(res => {
-            console.log("#login ▼");
-            console.log(res);
+          console.log("#login ▼");
+          console.log(res);
           if (res.data.msg === false) {
             this.$message.error("账号或密码错误！");
           } else {
-              this.$message.success("登录成功！");
-              this.$router.push(`/index?token=${res.data.token}&username=${this.user}`);
+            this.$message.success("登录成功！");
+            window.sessionStorage.setItem("token", res.data.token);
+              window.sessionStorage.setItem("username", res.data.user);
+            this.$router.push(`/index`);
           }
         })
         .catch(err => {
