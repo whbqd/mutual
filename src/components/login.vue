@@ -71,7 +71,7 @@ export default {
           } else {
             this.$message.success("登录成功！");
             window.sessionStorage.setItem("token", res.data.token);
-              window.sessionStorage.setItem("username", res.data.user);
+            window.sessionStorage.setItem("username", res.data.user);
             this.$router.push(`/index`);
           }
         })
@@ -100,7 +100,7 @@ export default {
   margin-top: -275px;
   padding: 20px 40px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.85);
   h1 {
     margin: 60px 0;
     text-align: center;

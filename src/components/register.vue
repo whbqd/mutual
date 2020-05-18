@@ -142,7 +142,7 @@
   margin-top: -325px;
   padding: 20px 48px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.85);
   //返回login页面
   .Tologin {
     position: absolute;

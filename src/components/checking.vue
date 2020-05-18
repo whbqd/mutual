@@ -103,7 +103,7 @@
   margin-top: -275px;
   padding: 20px 48px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.8);
   //返回login页面
   .Toup {
     position: absolute;
