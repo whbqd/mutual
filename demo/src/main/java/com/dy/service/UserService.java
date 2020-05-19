@@ -9,10 +9,34 @@ import org.springframework.stereotype.Service;
 public class UserService{
     @Autowired
     UserMapper userMapper;
-    public User queryById(int id) {
-        return userMapper.queryById(id);
-    }
+
+    /**
+     * 登录
+     * @param user
+     * @param password
+     * @return
+     */
     public User login(String user, String password) {
         return userMapper.login(user, password);
+    }
+
+    /**
+     * 注册
+     * @param user
+     * @param password
+     * @param email
+     * @return
+     */
+    public Integer register(String user, String password, String email) {
+        return userMapper.register(user, password, email);
+    }
+
+    /**
+     * 判断用户名是否重复
+     * @param user
+     * @return
+     */
+    public User queryByUser(String user) {
+        return userMapper.queryByUser(user);
     }
 }

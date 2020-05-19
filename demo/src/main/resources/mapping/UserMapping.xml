@@ -8,10 +8,16 @@
         <result column="email" jdbcType="VARCHAR" property="email" />
     </resultMap>
 
-    <select id="queryById" resultType="com.dy.entity.User">
-        select * from user where id = #{id}
+    <select id="queryByUser" resultType="com.dy.entity.User">
+        select * from user where user = #{user}
     </select>
+<!--    登录-->
     <select id="login" resultType="com.dy.entity.User">
         select * from user where user = #{user} and password = #{password}
     </select>
+<!--    注册-->
+    <insert id="register" parameterType="com.dy.entity.User">
+        insert into user values(id,#{user},#{password},#{email})
+    </insert>
+
 </mapper>
