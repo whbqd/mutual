@@ -1,28 +1,31 @@
+---
+typora-copy-images-to: ./
+---
+
 ### 1.pom.xml 依赖
 
 ```xml
  <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>1.3.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot</artifactId>
-            <version>2.2.6.RELEASE</version>
-        </dependency>
+     <groupId>mysql</groupId>
+     <artifactId>mysql-connector-java</artifactId>
+ </dependency>
+<dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jdbc</artifactId>
+</dependency>
+<dependency>
+       <groupId>org.mybatis.spring.boot</groupId>
+       <artifactId>mybatis-spring-boot-starter</artifactId>
+       <version>1.3.2</version>
+</dependency>
+<dependency>
+       <groupId>org.projectlombok</groupId>
+       <artifactId>lombok</artifactId>
+</dependency>
+<dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot</artifactId>
+        <version>2.2.6.RELEASE</version>
 </dependency>
 ```
 
@@ -35,7 +38,7 @@
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!--业务层所在位置-->
+<!--抽象类所在位置-->
 <mapper namespace="com.dy.mapper.UserMapper">
 								<!--实体类所在位置-->
     <resultMap id="BaseResultMap" type="com.dy.entity.User">
@@ -76,7 +79,7 @@ mybatis.type-aliases-package=com.dy.entity
 
 ### 4.创建包controller、entity、mapper、service。
 
-![image-20200519172516421](C:\Users\18086\AppData\Roaming\Typora\typora-user-images\image-20200519172516421.png)
+![image-20200519180403907](G:\学习笔记\image-20200519180403907.png)
 
 > User
 >
@@ -143,8 +146,6 @@ public class DemoApplication {
 
 }
 ```
-
-## 
 
 ### DemoApplication只能扫描到同一级目录下的文件包
 
