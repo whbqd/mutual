@@ -1,6 +1,6 @@
-package com.dy;
+package com.dy.controller;
 
-import entity.User;
+import com.dy.entity.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
