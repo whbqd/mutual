@@ -48,10 +48,30 @@ typora-copy-images-to: ./
         <result column="password" jdbcType="VARCHAR" property="password" />
         <result column="email" jdbcType="VARCHAR" property="email" />
     </resultMap>
-	<!--id=方法名 resultType 对应实体类所在位置-->
+	
     <select id="Sel" resultType="com.dy.entity.User">
         select * from user where id = #{id}
     </select>
+    <!--    查询用户名是否重复-->
+    <select id="queryByUser" resultType="com.dy.entity.User">
+        select * from user where user = #{user}
+    </select>
+<!--    查询用户名邮箱是否正确-->
+    <select id="UserIsPwd" resultType="com.dy.entity.User">
+        select * from user where user = #{user} and email = #{email}
+    </select>
+<!--    登录-->
+    <select id="login" resultType="com.dy.entity.User">
+        select * from user where user = #{user} and password = #{password}
+    </select>
+<!--    注册-->
+    <insert id="register" parameterType="com.dy.entity.User">
+        insert into user values(id,#{user},#{password},#{email})
+    </insert>
+<!--修改密码-->
+    <update id="updatePwd" parameterType="com.dy.entity.User">
+        update user set password = #{password} where user = #{user}
+    </update>
 </mapper>
 ```
 
@@ -139,7 +159,6 @@ mybatis.type-aliases-package=com.dy.entity
 @MapperScan("com.dy.mapper")
 @SpringBootApplication
 public class DemoApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
     }
