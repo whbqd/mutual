@@ -3,13 +3,25 @@
 <mapper namespace="com.dy.mapper.UserMapper">
     <resultMap id="BaseResultMap" type="com.dy.entity.User">
         <result column="id" jdbcType="INTEGER" property="id" />
-        <result column="user" jdbcType="VARCHAR" property="user" />
-        <result column="password" jdbcType="VARCHAR" property="password" />
-        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="user" jdbcType="CHAR" property="user" />
+        <result column="password" jdbcType="CHAR" property="password" />
+        <result column="email" jdbcType="CHAR" property="email" />
     </resultMap>
-
+    <!--    全查-->
+    <select id="queryAll" resultType="com.dy.entity.User">
+        select * from user
+    </select>
+<!--    根据id 查询信息-->
+    <select id="queryById" resultType="com.dy.entity.User">
+        select * from user where id = #{id}
+    </select>
+<!--    查询用户名是否重复-->
     <select id="queryByUser" resultType="com.dy.entity.User">
         select * from user where user = #{user}
+    </select>
+<!--    查询用户名邮箱是否正确-->
+    <select id="UserIsPwd" resultType="com.dy.entity.User">
+        select * from user where user = #{user} and email = #{email}
     </select>
 <!--    登录-->
     <select id="login" resultType="com.dy.entity.User">
@@ -19,5 +31,13 @@
     <insert id="register" parameterType="com.dy.entity.User">
         insert into user values(id,#{user},#{password},#{email})
     </insert>
+<!--修改密码-->
+    <update id="updatePwd" parameterType="com.dy.entity.User">
+        update user set password = #{password} where user = #{user}
+    </update>
 
+<!--    删除-->
+    <delete id="del" parameterType="com.dy.entity.User">
+        delete from user where id = #{id}
+    </delete>
 </mapper>

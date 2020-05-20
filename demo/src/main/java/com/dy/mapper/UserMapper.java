@@ -3,6 +3,8 @@ package com.dy.mapper;
 import com.dy.entity.User;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UserMapper {
     /**
@@ -28,4 +30,39 @@ public interface UserMapper {
      */
     User queryByUser(String user);
 
+    /**
+     * 判断用户名邮箱是否正确
+     * @param user
+     * @param email
+     * @return
+     */
+    User UserIsPwd(String user, String email);
+
+    /**
+     * 修改密码
+     * @param user
+     * @param password
+     * @return
+     */
+    Integer updatePwd(String user, String password);
+
+    /**
+     * 全查
+     * @return
+     */
+    List<User> queryAll();
+
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
+    Integer del(Integer id);
+
+    /**
+     * 根据id查询User
+     * @param id
+     * @return
+     */
+    User queryById(Integer id);
 }

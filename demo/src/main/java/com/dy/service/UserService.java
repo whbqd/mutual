@@ -5,6 +5,8 @@ import com.dy.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService{
     @Autowired
@@ -38,5 +40,45 @@ public class UserService{
      */
     public User queryByUser(String user) {
         return userMapper.queryByUser(user);
+    }
+
+    /**
+     * 判断用户名和邮箱是否正确
+     * @param user
+     * @param password
+     * @return
+     */
+    public User UserIsPwd(String user, String password) {
+        return userMapper.UserIsPwd(user, password);
+    }
+
+    /**
+     * 修改密码
+     * @param password
+     * @return
+     */
+    public Integer updatePwd(String user, String password) {
+        return userMapper.updatePwd(user, password);
+    }
+
+    /**
+     * 全查
+     * @return
+     */
+    public List<User> queryAll() {
+        return userMapper.queryAll();
+    }
+
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
+    public Integer del(Integer id) {
+        return userMapper.del(id);
+    }
+
+    public User queryById(Integer id) {
+        return userMapper.queryById(id);
     }
 }
