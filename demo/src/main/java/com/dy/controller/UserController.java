@@ -6,6 +6,7 @@ import com.dy.packageEntity.UpdatePwd;
 import com.dy.service.UserService;
 import com.dy.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +19,6 @@ import java.util.UUID;
 public class UserController {
     @Autowired
     private UserService userService;
-
     /**
      * 登录
      * @param user
@@ -28,12 +28,11 @@ public class UserController {
     @RequestMapping("login/{user}/{password}")
     public LoginUser login(@PathVariable String user, @PathVariable String password) {
         User u = userService.login(user, password);
-        LoginUser loginUser = new LoginUser(u, null, false);
         if(u != null) {
-            String token = String.valueOf(UUID.randomUUID());
-            loginUser = new LoginUser(u, token, true);
+            String token = UUID.randomUUID().toString().replaceAll("-","");
+            return new LoginUser(u, token, true);
         }
-        return loginUser;
+        return new LoginUser(u, null, false);
     }
 
     /**
