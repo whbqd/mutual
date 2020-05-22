@@ -1,17 +1,14 @@
 package com.dy.controller;
-import com.dy.packageEntity.CheckingUser;
-import com.dy.packageEntity.LoginUser;
-import com.dy.packageEntity.RegisterUser;
-import com.dy.packageEntity.UpdatePwd;
+import com.dy.packageEntity.*;
 import com.dy.service.UserService;
 import com.dy.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.time.Duration;
 import java.util.UUID;
 
 @RestController
@@ -19,22 +16,55 @@ import java.util.UUID;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
     /**
      * 登录
      * @param user
      * @param password
      * @return
      */
-    @RequestMapping("login/{user}/{password}")
-    public LoginUser login(@PathVariable String user, @PathVariable String password) {
+    @PostMapping("/login")
+    public Result login(@RequestParam String user, @RequestParam String password) {
         User u = userService.login(user, password);
+        System.out.println(u);
         if(u != null) {
             String token = UUID.randomUUID().toString().replaceAll("-","");
-            return new LoginUser(u, token, true);
+            redisTemplate.opsForValue().set(token, u, Duration.ofMinutes(30L));
+            return new Result(token, "登录成功", 100);
         }
-        return new LoginUser(u, null, false);
+        return new Result(null, "登录失败", 104);
     }
 
+    /**
+     * 退出登录 删除redis的token
+     * @param request
+     * @return
+     */
+    @RequestMapping("/view/logout")
+    public Result logout(HttpServletRequest request) {
+        String token = request.getHeader("token");
+        Boolean delete = redisTemplate.delete(token);
+        if(delete) {
+            return new Result(delete, "退出成功", 100);
+        }
+        return new Result(null, "退出失败", 104);
+    }
+    /**
+     * 通过token查询User信息
+     * @param request
+     * @return
+     */
+    @RequestMapping("/view/getUserOfLogin")
+    public Result getUserOfLogin(HttpServletRequest request) {
+        //获取token
+        String token = request.getHeader("token");
+        Object user = redisTemplate.opsForValue().get(token);
+        if(user == null) {
+            return new Result(null, "查询用户信息失败", 104);
+        }
+        return new Result(user, "查询用户信息成功", 100);
+    }
     /**
      * 注册
      * @param user
@@ -42,24 +72,22 @@ public class UserController {
      * @param email
      * @return
      */
-    @RequestMapping("/register/{user}/{password}/{email}")
-    public RegisterUser register(@PathVariable String user, @PathVariable String password, @PathVariable String email) {
+    @RequestMapping("/view/register/{user}/{password}/{email}")
+    public Result register(@PathVariable String user, @PathVariable String password, @PathVariable String email) {
         //查询用户名是否重复
         User isRepeat = userService.queryByUser(user);
-        RegisterUser registerUser = new RegisterUser();
         //重复
         if (isRepeat != null) {
-            registerUser.setMsg(false);
-            registerUser.setRepeat(true);
-            return registerUser;
+            return new Result(null, "用户名重复", 104);
         }
         //不重复,执行注册方法
         Integer flag = userService.register(user, password, email);
+        System.out.println(flag);
         isRepeat = userService.queryByUser(user);
-        registerUser.setData(isRepeat);
-        registerUser.setMsg(flag == 1);
-        registerUser.setRepeat(false);
-        return registerUser;
+        if (flag != 1) {
+            return new Result(null, "注册失败", 104);
+        }
+        return new Result(isRepeat, "注册成功", 100);
     }
 
     /**
@@ -68,15 +96,13 @@ public class UserController {
      * @param email
      * @return
      */
-    @RequestMapping("/checking/{user}/{email}")
-    public CheckingUser checking(@PathVariable String user, @PathVariable String email) {
+    @RequestMapping("/view/checking/{user}/{email}")
+    public Result checking(@PathVariable String user, @PathVariable String email) {
         User u = userService.UserIsPwd(user, email);
-        CheckingUser checkingUser = new CheckingUser(u, false);
         if(u == null) {
-            return checkingUser;
+            return new Result(null, "用户名或邮箱不正确", 104);
         }
-        checkingUser.setMsg(true);
-        return checkingUser;
+        return new Result(u, "用户名邮箱正确", 100);
     }
 
     /**
@@ -85,23 +111,22 @@ public class UserController {
      * @param password
      * @return
      */
-    @RequestMapping("/updatePwd/{user}/{password}")
-    public UpdatePwd updatePwd(@PathVariable String user, @PathVariable String password) {
+    @RequestMapping("/view/updatePwd/{user}/{password}")
+    public Result updatePwd(@PathVariable String user, @PathVariable String password) {
         Integer flag = userService.updatePwd(user, password);
-        UpdatePwd updatePwd = new UpdatePwd(null, false);
         if(flag != 1) {
-            return updatePwd;
+            return new Result(null, "更新失败", 104);
         }
-        return new UpdatePwd(userService.queryByUser(user), true);
+        return new Result(userService.queryByUser(user), "更新成功", 100);
     }
 
     /**
      * 全查
      * @return
      */
-    @RequestMapping("/queryAll")
-    public List<User> queryAll() {
-        return userService.queryAll();
+    @RequestMapping("/view/queryAll")
+    public Result queryAll() {
+        return new Result(userService.queryAll(), "全查成功", 100);
     }
 
     /**
@@ -109,14 +134,14 @@ public class UserController {
      * @param id
      * @return
      */
-    @RequestMapping("/del/{id}")
-    public CheckingUser del(@PathVariable Integer id) {
-        CheckingUser checkingUser = new CheckingUser(userService.queryById(id), true);
+    @RequestMapping("/view/del/{id}")
+    public Result del(@PathVariable Integer id) {
+        User user = userService.queryById(id);
         int flag = userService.del(id);
-        if(flag == 1) {
-            return checkingUser;
+        if(flag != 1) {
+            return new Result(null, "删除失败", 104);
         }
-        checkingUser = new CheckingUser(null, false);
-        return checkingUser;
+        return new Result(user, "删除成功", 100);
     }
+
 }
