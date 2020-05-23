@@ -12,6 +12,7 @@ import java.time.Duration;
 import java.util.UUID;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/user")
 public class UserController {
     @Autowired
@@ -45,7 +46,7 @@ public class UserController {
         String token = request.getHeader("token");
         Boolean delete = redisTemplate.delete(token);
         if(delete) {
-            return new Result(delete, "退出成功", 100);
+            return new Result(true, "退出成功", 100);
         }
         return new Result(null, "退出失败", 104);
     }
@@ -54,6 +55,7 @@ public class UserController {
      * @param request
      * @return
      */
+
     @RequestMapping("/view/getUserOfLogin")
     public Result getUserOfLogin(HttpServletRequest request) {
         //获取token
@@ -71,6 +73,7 @@ public class UserController {
      * @param email
      * @return
      */
+
     @PostMapping("/register")
     public Result register(@RequestParam String user, @RequestParam String password, @RequestParam String email) {
         //查询用户名是否重复
@@ -95,6 +98,7 @@ public class UserController {
      * @param email
      * @return
      */
+
     @PostMapping("/checking")
     public Result checking(@RequestParam String user, @RequestParam String email) {
         User u = userService.UserIsPwd(user, email);
@@ -110,6 +114,7 @@ public class UserController {
      * @param password
      * @return
      */
+
     @PostMapping("/updatePwd")
     public Result updatePwd(@RequestParam String user, @RequestParam String password) {
         Integer flag = userService.updatePwd(user, password);
@@ -123,6 +128,7 @@ public class UserController {
      * 全查
      * @return
      */
+
     @PostMapping("/view/queryAll")
     public Result queryAll() {
         return new Result(userService.queryAll(), "全查成功", 100);
@@ -142,6 +148,15 @@ public class UserController {
         }
         return new Result(user, "删除成功", 100);
     }
+
+    /**
+     *
+     * @param user
+     * @param password
+     * @param email
+     * @param id
+     * @return
+     */
     @PostMapping("/view/updateUser")
     public Result updateUser(@RequestParam String user, @RequestParam String password, @RequestParam String email, @RequestParam Integer id) {
         Integer flag = userService.updateUser(user, password, email, id);
@@ -151,4 +166,17 @@ public class UserController {
         return new Result(userService.queryById(id), "修改成功", 100);
     }
 
+    /**
+     * 通过id查询用户信息
+     * @param id
+     * @return
+     */
+    @PostMapping("/view/queryIdByUser")
+    public Result queryIdByUser(@RequestParam Integer id) {
+        User user = userService.queryIdByUser(id);
+        if(user != null) {
+            return new Result(user, "查询成功", 100);
+        }
+        return new Result(null, "查询失败", 104);
+    }
 }

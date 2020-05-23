@@ -45,4 +45,8 @@
     <update id="updateUser" parameterType="com.dy.entity.User">
         update user set user = #{user}, password = #{password}, email = #{email} where id = #{id}
     </update>
+<!--    通过id查询user-->
+    <select id="queryIdByUser" resultType="com.dy.entity.User">
+        select * from user where id = #{id}
+    </select>
 </mapper>

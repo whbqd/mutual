@@ -74,4 +74,11 @@ public interface UserMapper {
      * @return
      */
     Integer updateUser(String user, String password, String email, Integer id);
+
+    /**
+     * 根据id 查询user
+     * @param id
+     * @return
+     */
+    User queryIdByUser(Integer id);
 }

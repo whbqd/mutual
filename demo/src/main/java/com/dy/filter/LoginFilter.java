@@ -35,13 +35,14 @@ public class LoginFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         //Filter过滤器跨域处理
         String origin = request.getHeader("Origin");
-        response.setHeader("Access-Control-Allow-Origin", origin);
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "*");
         response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "x-requested-with,Authorization,token");
+        response.setHeader("Access-Control-Allow-Headers", "*");
         response.setHeader("Access-Control-Allow-Credentials", "true");
 //        获取token
         String token = request.getHeader("token");
+        //System.out.println("filter :" + token);
         //如果token为null替换为空字符串“”
         token = token == null ? "" : token;
         //查询token在redis的剩余时间

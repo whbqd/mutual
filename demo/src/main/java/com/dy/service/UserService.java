@@ -87,7 +87,19 @@ public class UserService{
         return userMapper.queryById(id);
     }
 
+    /**
+     * 修改用户信息
+     * @param user
+     * @param password
+     * @param email
+     * @param id
+     * @return
+     */
     public Integer updateUser(String user, String password, String email, Integer id) {
         return userMapper.updateUser(user, password, email, id);
+    }
+
+    public User queryIdByUser(Integer id) {
+        return userMapper.queryIdByUser(id);
     }
 }
