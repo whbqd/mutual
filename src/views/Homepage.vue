@@ -108,12 +108,25 @@
   </div>
 </template>
 <script>
+import axios from "axios";
+
 export default {
   name: "Homepage",
   data() {
     return {
-      username: window.sessionStorage.getItem("username")
+      username: "用户名"
     };
+  },
+  created() {
+    axios({
+      url: "http://localhost:8080/user/view/getUserOfLogin",
+      method: "post",
+      headers: {
+        token: window.localStorage.getItem("token")
+      }
+    }).then(res => {
+      this.username = res.data.data.user;
+    });
   }
 };
 </script>
@@ -135,6 +148,7 @@ export default {
   /*个人标语块*/
   .top {
     width: 100%;
+    min-width: 950px;
     height: 150px;
     background-color: #2f3640;
     border-bottom-right-radius: 3px;

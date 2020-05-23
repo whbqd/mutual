@@ -62,9 +62,9 @@
 </template>
 
 <script>
-    import axios from "axios";
+import axios from "axios";
 
-    export default {
+export default {
   name: "register",
   data() {
     return {
@@ -96,24 +96,23 @@
         return false;
       }
       axios({
-          url: "https://www.whbqd.xyz/Login/register",
-          methods: "get",
-          params: {
-              user: this.user,
-              password: this.password,
-              email: this.email
-          }
+        url: "http://localhost:8080/user/register",
+        method: "post",
+        params: {
+          user: this.user,
+          password: this.password,
+          email: this.email
+        }
       })
         .then(res => {
-            console.log("#register ▼");
-            console.log(res);
-          if (res.data.repeatUser) {
-            this.$message.error("账号已被注册！");
-          } else if (res.data.msg) {
+          console.log("#register ▼");
+          console.log(res);
+          if (res.data.code === 104) {
+            this.$message.error(res.data.message);
+            return false;
+          } else {
             this.$message.success("注册成功！");
-            this.$router.push("/");
-          } else if (!res.data.msg) {
-            this.$message.error("注册失败！");
+            this.$router.push("/login");
           }
         })
         .catch(err => {

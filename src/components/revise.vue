@@ -63,8 +63,8 @@
         return false;
       }
       axios({
-          url: "https://www.whbqd.xyz/Login/revise",
-          methods: "get",
+          url: "http://localhost:8080/user/updatePwd",
+          method: "post",
           params: {
               user: this.$route.query.user,
               password: this.password
@@ -73,11 +73,11 @@
         .then(res => {
             console.log("#revise ▼");
             console.log(res);
-          if (res.data.msg === true) {
-            this.$message.success("修改成功!");
+          if (res.data.code === 100) {
+            this.$message.success(res.data.message);
             this.$router.push("/");
           } else {
-            this.$message.error("修改失败!");
+            this.$message.error(res.data.message);
           }
         })
         .catch(err => {

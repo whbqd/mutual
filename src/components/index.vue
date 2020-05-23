@@ -68,6 +68,7 @@
 
 <script>
 import $ from "jquery";
+import axios from "axios";
 export default {
   data() {
     return {
@@ -79,7 +80,15 @@ export default {
     };
   },
   created() {
-    this.UserName = window.sessionStorage.getItem("username");
+    axios({
+      url: "http://localhost:8080/user/view/getUserOfLogin",
+      method: "post",
+      headers: {
+        token: window.localStorage.getItem("token")
+      }
+    }).then(res => {
+      this.UserName = res.data.data.user;
+    });
   },
   methods: {
     // 功能1与2的下拉效果及图标转换
@@ -109,8 +118,22 @@ export default {
     },
     // 退出登录点击事件
     outLogin() {
+      axios({
+        url: "http://localhost:8080/user/view/logout",
+        method: "post",
+        headers: {
+          token: window.localStorage.getItem("token")
+        }
+      }).then(res => {
+        console.log(res);
+        if (res.data.code === 100) {
+          this.$message.success(res.data.message);
+        } else {
+          this.$message.error(res.data.message);
+        }
+      });
       // 清空token
-      window.sessionStorage.clear();
+      window.localStorage.removeItem("token");
       // 跳转到登录页
       this.$router.push("/login");
     }

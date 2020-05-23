@@ -83,7 +83,7 @@ router.beforeEach((to, from, next) => {
   )
     return next();
   // 获取token
-  const token = window.sessionStorage.getItem("token");
+  const token = window.localStorage.getItem("token");
   // 没有token则强制跳转到登录页面
   if (!token) return next("/login");
   // 有token就放行

@@ -117,11 +117,14 @@ export default {
     //获取全部信息
     getUserAll() {
       axios({
-        url: "https://www.whbqd.xyz/Login/UserAll",
-        methods: "get"
+        url: "http://localhost:8080/user/view/queryAll",
+        method: "post",
+        headers: {
+          token: window.localStorage.getItem("token")
+        }
       })
         .then(res => {
-          this.UserList = res.data.userList;
+          this.UserList = res.data.data;
           console.log(res);
         })
         .catch(err => {
@@ -146,19 +149,22 @@ export default {
     // 根据id删除行
     cutout(id) {
       axios({
-        url: "https://www.whbqd.xyz/Login/delete",
-        methods: "get",
+        url: " http://localhost:8080/user/view/del",
+        method: "post",
+          headers: {
+            token: window.localStorage.getItem("token")
+          },
         params: {
           id
         }
       })
         .then(res => {
           console.log(res);
-          if (res.data.msg) {
-            this.$message.success("删除成功!!!");
+          if (res.data.code === 100) {
+            this.$message.success(res.data.message);
             this.getUserAll();
           } else {
-            this.$message.error("删除失败!!!");
+            this.$message.error(res.data.message);
           }
         })
         .catch(err => {
@@ -166,20 +172,21 @@ export default {
           this.$message.error("服务器超时!!!");
         });
     },
-    // 修改
+    // 修改卡中显示旧信息
     reviseClick(id) {
       $(".modify").fadeToggle(300);
       this.id = id;
       axios({
-        url: "https://www.whbqd.xyz/Login/idAll",
-        methods: "post",
+        url: "http://localhost:8080/user/view/queryIdByUser",
+        method: "post",
+        headers: { token: window.localStorage.getItem("token") },
         params: {
           id
         }
       })
         .then(res => {
           console.log(res);
-          this.oneUserList = res.data;
+          this.oneUserList = res.data.data;
         })
         .catch(err => {
           console.log(err);
@@ -205,8 +212,11 @@ export default {
       }
       // 修改 信息
       axios({
-        url: "https://www.whbqd.xyz/Login/reviseByid",
-        methods: "post",
+        url: "http://localhost:8080/user/view/updateUser",
+        method: "post",
+        headers: {
+          token: window.localStorage.getItem("token")
+        },
         params: {
           id,
           user: this.user,
@@ -216,13 +226,15 @@ export default {
       })
         .then(res => {
           console.log(res);
-          if (res.data) {
-            this.$message.success("修改成功!");
+          if (res.data.code === 100) {
+            this.$message.success(res.data.message);
             $(".modify").fadeToggle(300);
             this.getUserAll();
             this.user = "";
             this.password = "";
             this.email = "";
+          } else {
+            this.$message.success(res.data.message);
           }
         })
         .catch(err => {

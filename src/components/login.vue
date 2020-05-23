@@ -56,8 +56,8 @@ export default {
   methods: {
     login() {
       axios({
-        url: "https://www.whbqd.xyz/Login/login",
-        methods: "get",
+        url: "http://localhost:8080/user/login",
+        method: "post",
         params: {
           user: this.user,
           password: this.password
@@ -66,12 +66,13 @@ export default {
         .then(res => {
           console.log("#login ▼");
           console.log(res);
-          if (res.data.msg === false) {
-            this.$message.error("账号或密码错误！");
-          } else {
-            this.$message.success("登录成功！");
-            window.sessionStorage.setItem("token", res.data.token);
-            window.sessionStorage.setItem("username", res.data.user);
+          if (res.data.code === 104) {
+            this.$message.error(res.data.message);
+            return false;
+          }
+          if (res.data.code === 100) {
+            this.$message.success(res.data.message);
+            window.localStorage.setItem("token", res.data.data);
             this.$router.push(`/index`);
           }
         })
