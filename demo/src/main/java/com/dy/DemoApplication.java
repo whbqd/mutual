@@ -16,9 +16,13 @@ import org.springframework.http.converter.HttpMessageConverter;
  * @author 18086
  */
 @MapperScan("com.dy.mapper")
-
+@ServletComponentScan(basePackages = "com.dy.filter")
 @SpringBootApplication
 public class DemoApplication {
+    /**
+     * 配置fastjson为boot默认json
+     * @return
+     */
     @Bean
     public HttpMessageConverters fastJsonHttpMessageConverters() {
         // 1.定义一个converters转换消息的对象

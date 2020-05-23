@@ -65,4 +65,13 @@ public interface UserMapper {
      * @return
      */
     User queryById(Integer id);
+
+    /**
+     * 修改User
+     * @param user
+     * @param password
+     * @param email
+     * @return
+     */
+    Integer updateUser(String user, String password, String email, Integer id);
 }

@@ -22,8 +22,7 @@ import java.util.concurrent.TimeUnit;
  * Version 1.0
  * @author 18086
  */
-@Configuration
-@WebFilter(urlPatterns = {"/view/*"}, filterName = "LoginFilter")
+@WebFilter(urlPatterns = {"/user/view/*"}, filterName = "LoginFilter")
 public class LoginFilter implements Filter {
     @Resource
     private RedisTemplate<String, Object> redisTemplate;

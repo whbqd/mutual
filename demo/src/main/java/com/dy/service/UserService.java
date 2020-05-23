@@ -78,7 +78,16 @@ public class UserService{
         return userMapper.del(id);
     }
 
+    /**
+     * 通过id查询user
+     * @param id
+     * @return
+     */
     public User queryById(Integer id) {
         return userMapper.queryById(id);
+    }
+
+    public Integer updateUser(String user, String password, String email, Integer id) {
+        return userMapper.updateUser(user, password, email, id);
     }
 }

@@ -27,7 +27,6 @@ public class UserController {
     @PostMapping("/login")
     public Result login(@RequestParam String user, @RequestParam String password) {
         User u = userService.login(user, password);
-        System.out.println(u);
         if(u != null) {
             String token = UUID.randomUUID().toString().replaceAll("-","");
             redisTemplate.opsForValue().set(token, u, Duration.ofMinutes(30L));
@@ -72,8 +71,8 @@ public class UserController {
      * @param email
      * @return
      */
-    @RequestMapping("/view/register/{user}/{password}/{email}")
-    public Result register(@PathVariable String user, @PathVariable String password, @PathVariable String email) {
+    @PostMapping("/register")
+    public Result register(@RequestParam String user, @RequestParam String password, @RequestParam String email) {
         //查询用户名是否重复
         User isRepeat = userService.queryByUser(user);
         //重复
@@ -96,8 +95,8 @@ public class UserController {
      * @param email
      * @return
      */
-    @RequestMapping("/view/checking/{user}/{email}")
-    public Result checking(@PathVariable String user, @PathVariable String email) {
+    @PostMapping("/checking")
+    public Result checking(@RequestParam String user, @RequestParam String email) {
         User u = userService.UserIsPwd(user, email);
         if(u == null) {
             return new Result(null, "用户名或邮箱不正确", 104);
@@ -111,20 +110,20 @@ public class UserController {
      * @param password
      * @return
      */
-    @RequestMapping("/view/updatePwd/{user}/{password}")
-    public Result updatePwd(@PathVariable String user, @PathVariable String password) {
+    @PostMapping("/updatePwd")
+    public Result updatePwd(@RequestParam String user, @RequestParam String password) {
         Integer flag = userService.updatePwd(user, password);
         if(flag != 1) {
-            return new Result(null, "更新失败", 104);
+            return new Result(null, "修改失败", 104);
         }
-        return new Result(userService.queryByUser(user), "更新成功", 100);
+        return new Result(userService.queryByUser(user), "修改成功", 100);
     }
 
     /**
      * 全查
      * @return
      */
-    @RequestMapping("/view/queryAll")
+    @PostMapping("/view/queryAll")
     public Result queryAll() {
         return new Result(userService.queryAll(), "全查成功", 100);
     }
@@ -134,14 +133,22 @@ public class UserController {
      * @param id
      * @return
      */
-    @RequestMapping("/view/del/{id}")
-    public Result del(@PathVariable Integer id) {
+    @PostMapping("/view/del")
+    public Result del(@RequestParam Integer id) {
         User user = userService.queryById(id);
         int flag = userService.del(id);
         if(flag != 1) {
             return new Result(null, "删除失败", 104);
         }
         return new Result(user, "删除成功", 100);
+    }
+    @PostMapping("/view/updateUser")
+    public Result updateUser(@RequestParam String user, @RequestParam String password, @RequestParam String email, @RequestParam Integer id) {
+        Integer flag = userService.updateUser(user, password, email, id);
+        if(flag != 1) {
+            return new Result(null, "修改失败", 104);
+        }
+        return new Result(userService.queryById(id), "修改成功", 100);
     }
 
 }
