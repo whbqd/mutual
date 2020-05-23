@@ -58,7 +58,8 @@ public class UserController {
 
     @RequestMapping("/view/getUserOfLogin")
     public Result getUserOfLogin(HttpServletRequest request) {
-        //获取token
+//        获取token
+
         String token = request.getHeader("token");
         Object user = redisTemplate.opsForValue().get(token);
         if(user == null) {
