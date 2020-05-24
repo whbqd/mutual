@@ -2,6 +2,8 @@ package com.dy.controller;
 import com.dy.packageEntity.*;
 import com.dy.service.UserService;
 import com.dy.entity.User;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.time.Duration;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -59,7 +62,6 @@ public class UserController {
     @RequestMapping("/view/getUserOfLogin")
     public Result getUserOfLogin(HttpServletRequest request) {
 //        获取token
-
         String token = request.getHeader("token");
         Object user = redisTemplate.opsForValue().get(token);
         if(user == null) {
@@ -131,8 +133,11 @@ public class UserController {
      */
 
     @PostMapping("/view/queryAll")
-    public Result queryAll() {
-        return new Result(userService.queryAll(), "全查成功", 100);
+    public Result queryAll(@RequestParam Integer pageNow, @RequestParam Integer pageSize) {
+        PageHelper.startPage(pageNow, pageSize);
+        List<User> list = userService.queryAll();
+        PageInfo<User> info = new PageInfo<>(list);
+        return new Result(info, "全查成功", 100);
     }
 
     /**
@@ -151,7 +156,7 @@ public class UserController {
     }
 
     /**
-     *
+     *修改用户信息
      * @param user
      * @param password
      * @param email

@@ -99,6 +99,11 @@ public class UserService{
         return userMapper.updateUser(user, password, email, id);
     }
 
+    /**
+     * 通过id查询用户信息
+     * @param id
+     * @return
+     */
     public User queryIdByUser(Integer id) {
         return userMapper.queryIdByUser(id);
     }

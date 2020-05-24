@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dy.mapper.GoodsMapper">
+    <resultMap id="BaseResultMap" type="com.dy.entity.Goods">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="number" jdbcType="INTEGER" property="number" />
+        <result column="name" jdbcType="CHAR" property="name" />
+        <result column="price" jdbcType="INTEGER" property="price" />
+        <result column="type" jdbcType="CHAR" property="type" />
+    </resultMap>
+<!--    查询商品列表-->
+    <select id="queryAllGoods" resultType="com.dy.entity.Goods">
+        select * from goods
+    </select>
+<!--添加商品-->
+    <insert id="addGoods" parameterType="com.dy.entity.Goods">
+        insert into goods values(id,#{number},#{name},#{price},#{type})
+    </insert>
+<!--    通过订单编号 查询商品-->
+    <select id="queryNumber" resultType="com.dy.entity.Goods">
+        select * from goods where number = #{number}
+    </select>
+<!--    通过订单编号删除商品-->
+    <delete id="delNumber" parameterType="com.dy.entity.Goods">
+        delete from goods where number = #{number}
+    </delete>
+<!--修改商品信息-->
+    <update id="updateGoods" parameterType="com.dy.entity.Goods">
+        update goods set number = #{number}, name = #{name}, price = #{price}, type = #{type} where id = #{id}
+    </update>
+<!--    根据id查询商品信息-->
+    <select id="queryId" resultType="com.dy.entity.Goods">
+        select * from goods where id = #{id}
+    </select>
+</mapper>
