@@ -25,7 +25,7 @@
         <div class="t1">
           <ul class="gn">
             <li class="li1" @click="gn1Hide()">
-              <span class="gn1Icon1 el-icon-menu"></span>功能区1
+              <span class="gn1Icon1 el-icon-menu"></span>用户
               <span class="gn1Icon2 el-icon-arrow-down"></span>
             </li>
             <li class="li2">
@@ -43,11 +43,11 @@
         <div class="t1">
           <ul class="gn">
             <li class="li1" @click="gn2Hide()">
-              <span class="gn2Icon1 el-icon-s-data"></span>功能区2
+              <span class="gn2Icon1 el-icon-s-data"></span>商品
               <span class="gn2Icon2 el-icon-arrow-down"></span>
             </li>
             <li class="gn2li2">
-              <router-link to="####">组件1</router-link>
+              <router-link to="/index/commodity">商品管理</router-link>
             </li>
             <li class="gn2li2">
               <router-link to="#####">组件2</router-link>

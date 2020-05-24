@@ -41,6 +41,18 @@
           </tr>
         </tbody>
       </table>
+      <!--分页-->
+      <div class="page">
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          class="page_el"
+          @current-change="handleCurrentChange"
+          :page-count="this.lastPage"
+          :hide-on-single-page="!(lastPage > 1)"
+        >
+        </el-pagination>
+      </div>
     </div>
 
     <!--修改-->
@@ -107,24 +119,64 @@ export default {
       email: "",
       isDisabled: false,
       //点击编辑的单用户数组
-      oneUserList: []
+      oneUserList: [],
+      // 当前页数
+      pageNow: 1,
+      //每页显示数量
+      pageSize: 9,
+      //最后一页的页码
+      lastPage: 1
     };
   },
   created() {
-    this.getUserAll();
+    this.InitGetUserAll();
   },
   methods: {
-    //获取全部信息
-    getUserAll() {
+    //分页
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+      this.pageNow = val;
+      this.getUserAll(this.pageNow);
+    },
+
+    //获取全部信息(页码)
+    getUserAll(pageNow) {
       axios({
         url: "http://localhost:8080/user/view/queryAll",
         method: "post",
         headers: {
           token: window.localStorage.getItem("token")
+        },
+        params: {
+          pageNow,
+          pageSize: this.pageSize
         }
       })
         .then(res => {
-          this.UserList = res.data.data;
+          this.UserList = res.data.data.list;
+          console.log(res);
+        })
+        .catch(err => {
+          err;
+          this.$message.error("服务器超时");
+        });
+    },
+    //获取全部信息(初始化)
+    InitGetUserAll() {
+      axios({
+        url: "http://localhost:8080/user/view/queryAll",
+        method: "post",
+        headers: {
+          token: window.localStorage.getItem("token")
+        },
+        params: {
+          pageNow: 1,
+          pageSize: this.pageSize
+        }
+      })
+        .then(res => {
+          this.UserList = res.data.data.list;
+          this.lastPage = res.data.data.lastPage;
           console.log(res);
         })
         .catch(err => {
@@ -151,9 +203,9 @@ export default {
       axios({
         url: " http://localhost:8080/user/view/del",
         method: "post",
-          headers: {
-            token: window.localStorage.getItem("token")
-          },
+        headers: {
+          token: window.localStorage.getItem("token")
+        },
         params: {
           id
         }
@@ -162,7 +214,7 @@ export default {
           console.log(res);
           if (res.data.code === 100) {
             this.$message.success(res.data.message);
-            this.getUserAll();
+            this.getUserAll(this.pageNow);
           } else {
             this.$message.error(res.data.message);
           }
@@ -229,7 +281,7 @@ export default {
           if (res.data.code === 100) {
             this.$message.success(res.data.message);
             $(".modify").fadeToggle(300);
-            this.getUserAll();
+            this.getUserAll(this.pageNow);
             this.user = "";
             this.password = "";
             this.email = "";
@@ -267,12 +319,12 @@ export default {
   }
   /*表格div*/
   .user {
-    overflow-x: hidden;
-    overflow-y: auto;
+    /*overflow-x: hidden;*/
+    /*overflow-y: auto;*/
     height: 95%;
-    &::-webkit-scrollbar {
-      display: none;
-    }
+    /*&::-webkit-scrollbar {*/
+    /*  display: none;*/
+    /*}*/
 
     /*表格*/
     .tableUser {
@@ -281,6 +333,7 @@ export default {
 
       td {
         text-align: center;
+        color: #606266;
       }
 
       /*删除标志*/
@@ -310,7 +363,14 @@ export default {
       }
     }
   }
-
+  .page {
+    width: 100%;
+    display: flex;
+    margin-top: 15px;
+    .page_el {
+      margin: auto;
+    }
+  }
   /*修改界面*/
   .modify {
     display: none;
