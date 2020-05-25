@@ -72,7 +72,7 @@ public class GoodsController {
     }
 
     @PostMapping("/updateGoods")
-    public Result updataGoods(@RequestParam Integer number, @RequestParam String name, @RequestParam Integer price, @RequestParam String type, @RequestParam Integer id) {
+    public Result updateGoods(@RequestParam Integer number, @RequestParam String name, @RequestParam Integer price, @RequestParam String type, @RequestParam Integer id) {
         int flag = goodsService.updateGoods(number, name, price, type, id);
         if(flag != 1) {
             return new Result(null, "修改失败", 104);

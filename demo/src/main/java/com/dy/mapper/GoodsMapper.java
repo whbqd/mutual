@@ -1,7 +1,11 @@
 package com.dy.mapper;
 
 import com.dy.entity.Goods;
-import com.dy.entity.User;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,12 +15,14 @@ import java.util.List;
  * Date: 2020/5/24 13:09
  * Version 1.0
  */
+@MapperScan
 @Repository
 public interface GoodsMapper {
     /**
      * 查询商品列表
      * @return
      */
+    @Select("select * from goods")
     List<Goods> queryAllGoods();
 
     /**
@@ -27,6 +33,7 @@ public interface GoodsMapper {
      * @param type
      * @return
      */
+    @Insert("insert into goods values(id,#{number},#{name},#{price},#{type})")
     Integer addGoods(Integer number, String name, Integer price, String type);
 
     /**
@@ -34,6 +41,7 @@ public interface GoodsMapper {
      * @param number
      * @return
      */
+    @Select("select * from goods where number = #{number}")
     Goods queryNumber(Integer number);
 
     /**
@@ -41,6 +49,7 @@ public interface GoodsMapper {
      * @param number
      * @return
      */
+    @Delete("delete from goods where number = #{number}")
     Integer delNumber(Integer number);
 
     /**
@@ -53,6 +62,7 @@ public interface GoodsMapper {
      * @param id
      * @return
      */
+    @Update("update goods set number = #{number}, name = #{name}, price = #{price}, type = #{type} where id = #{id}")
     Integer updateGoods(Integer number, String name, Integer price, String type, Integer id);
 
     /**
@@ -60,5 +70,6 @@ public interface GoodsMapper {
      * @param id
      * @return
      */
+    @Select("select * from goods where id = #{id}")
     Goods queryId(Integer id);
 }
