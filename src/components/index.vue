@@ -5,11 +5,41 @@
       <span class="title"
         ><span class="el-icon-s-tools"></span>后台管理系统</span
       >
-      <div class="userImg">
-        <span class="out" @click="outLogin">退出登录</span>
+      <div id="img_down" class="userImg" @mouseenter="mouseIn()">
         <img src="../assets/default_colleagues.jpg" alt="" />
         <span>{{ UserName }}</span>
       </div>
+      <template>
+        <div
+          style="display:none; padding: 0;z-index: 999999;position: absolute;right: 0;background: #dcdde1"
+          id="cd_down"
+          @mouseleave="mouseOut()"
+        >
+          <Card
+            title="个人"
+            icon="md-person"
+            :padding="0"
+            shadow
+            style="width: 200px;"
+            class="downCard"
+          >
+            <!--          <Card-->
+            <!--            :title="UserName"-->
+            <!--            icon="md-person"-->
+            <!--            :padding="0"-->
+            <!--            shadow-->
+            <!--            style="width: 180px;"-->
+            <!--            class="downCard"-->
+            <!--          >-->
+            <CellGroup>
+              <Cell title="个人主页" to="/index/Homepage" />
+              <Cell title="用户管理" label="用户" to="/index/Table" />
+              <Cell title="商品管理" label="商品" to="/index/commodity" />
+              <div class="outlogin" @click="outLogin()">退出登录</div>
+            </CellGroup>
+          </Card>
+        </div>
+      </template>
     </div>
     <!--中-->
     <div class="container">
@@ -47,13 +77,9 @@
               <span class="gn2Icon2 el-icon-arrow-down"></span>
             </li>
             <li class="gn2li2">
-              <router-link to="/index/commodity">商品管理</router-link>
-            </li>
-            <li class="gn2li2">
-              <router-link to="#####">组件2</router-link>
-            </li>
-            <li class="gn2li2">
-              <router-link to="######">组件3</router-link>
+              <router-link to="/index/commodity" class="tb"
+                >商品管理</router-link
+              >
             </li>
           </ul>
         </div>
@@ -136,7 +162,13 @@ export default {
       window.localStorage.removeItem("token");
       // 跳转到登录页
       this.$router.push("/login");
-    }
+    },
+      mouseIn() {
+        $("#cd_down").fadeToggle();
+      },
+      mouseOut() {
+          $("#cd_down").fadeToggle();
+      }
   }
 };
 </script>
@@ -170,17 +202,9 @@ export default {
     .userImg {
       display: flex;
       float: right;
-      margin-right: 5px;
+      margin-right: 30px;
       height: 50px;
-      /*退出登录*/
-      .out {
-        font-size: 14px;
-        margin-right: 10px;
-        cursor: pointer;
-        &:hover {
-          color: #ced6e0;
-        }
-      }
+      cursor: pointer;
       /*用户图片*/
       img {
         height: 40px;
@@ -192,6 +216,21 @@ export default {
       span {
         font-size: 15px;
         margin-left: 5px;
+      }
+    }
+    .downCard {
+      background: #dcdde1;
+      box-shadow: 0 0 15px #2d3436;
+      .outlogin {
+        background: #7f8fa6;
+        width: 100%;
+        height: 35px;
+        text-align: center;
+        line-height: 35px;
+        cursor: pointer;
+        &:hover {
+          color: #000;
+        }
       }
     }
   }
@@ -299,6 +338,10 @@ export default {
             cursor: pointer;
             font-weight: bold;
             font-size: 15px;
+            .tb {
+              display: inline-block;
+              width: 100%;
+            }
             /*li的选中状态*/
             .router-link-active {
               color: #7d5fff;

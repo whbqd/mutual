@@ -101,7 +101,7 @@ export default {
   margin-top: -275px;
   padding: 20px 40px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.8);
   h1 {
     margin: 60px 0;
     text-align: center;

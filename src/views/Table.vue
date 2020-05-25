@@ -315,6 +315,7 @@ export default {
     height: 20px;
     line-height: 20px;
     margin-bottom: 10px;
+    font-size: 20px;
     padding-left: 3px;
   }
   /*表格div*/
