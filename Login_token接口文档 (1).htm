@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Login_token_项目接口文档</title>
+    <!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <meta name="keywords" content="接口文档,ApiPost">
+    <meta name="description" content="本文档由可直接生成文档的API调试、管理工具ApiPost生成">
+    <meta name="author" content="https://www.apipost.cn/">
+    <link rel="stylesheet" href="https://docs.apipost.cn/statics/css/editor-preview.css">
+    <link rel="stylesheet" href="https://docs.apipost.cn/statics/highlight/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://docs.apipost.cn/statics/css/style.css?v=20200506" />
+    <link rel="stylesheet" type="text/css" href="https://img.cdn.apipost.cn/statics/build-in/font-awesome/css/font-awesome.min.css" />
+    <link rel="shortcut icon" href="https://docs.apipost.cn/statics/images/favicon.ico" />
+</head>
+<body>
+
+<!--顶部导航-->
+<div class="page-title-fixed">
+    <div class="container">
+        <h1 class="logo">
+            <a href="https://docs.apipost.cn/view/ed13ab8ead7bce08">
+                <span class="logo-name">Login_token</span>
+            </a>
+        </h1>
+        <ul class="page-menus">
+            <li>
+                <a href="https://docs.apipost.cn/view/ed13ab8ead7bce08" class="active">使用文档</a>
+            </li>
+            <li>
+                <a href="javascript:;">导出离线</a>
+                <ul class="page-menus-btns">
+                    <li><a target="_blank" href="https://docs.apipost.cn/html/ed13ab8ead7bce08" class="page-export-btn" data-target="html">导出HTML</a></li>
+                    <li><a target="_blank" href="https://docs.apipost.cn/markdown/ed13ab8ead7bce08" class="page-export-btn" data-target="markdown">导出MarkDown</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--内容-->
+<div class="wrapper">
+    <div class="container">
+        <div class="sidebar-wrapper fixed">
+            <div class="sidebar apt-left-menu">
+                <script type="text" id="template-apt-left-menu-tpl">
+                {{if menu && menu.length > 0}}
+                <ul class="menu-group">
+                    {{each menu item i}}
+                    <li class="menu-item active">
+                        {{if item.target_type == 'folder'}}
+                        <a class="a-folder-btn sub-title"  data-{{item.target_type}}_id="{{item.target_id}}" href="javascript:;"><i class="fa fa-folder-o" aria-hidden="true"></i> {{item.name}}</a>
+                        {{if item.menu.length > 0}}
+                        <ul class="menu-group">
+                            {{each item.menu item2 i2}}
+                            <li class="menu-item active">
+                                {{if item2.target_type == 'folder'}}
+                                <a class="a-folder-btn sub-title"  data-{{item2.target_type}}_id="{{item2.target_id}}" href="javascript:;"><i class="fa fa-folder-o" aria-hidden="true"></i> {{item2.name}}</a>
+                                {{include 'template-apt-left-menu-tpl' item2}}
+                                {{else}}
+                                <a class="a-target-btn sub-title {{item2.mark}}"  data-target_id="{{item2.target_id}}" href="javascript:;">{{item2.name}}</a>
+                                {{/if}}
+                            </li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                        {{else}}
+                        <a class="a-target-btn sub-title {{item.mark}}"  data-target_id="{{item.target_id}}" href="javascript:;">{{item.name}}</a>
+                        {{/if}}
+                    </li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+                </script>
+            </div>
+        </div>
+
+        <div class="main-container">
+
+            <div class="breadcrumb">
+
+                <div class="breadcrumb-anchor">
+
+                    <div class="anchor-toc">
+                        <div class="dropdown-toc">
+                            <div class="dropdown-trigger">
+                                <span class="toc-current">本页导航</span>
+                                <span class="icon-down"></span>
+                            </div>
+                            <div class="dropdown-body">
+                                <ul>
+                                    <li>
+                                        <a href="javascript:;">基本信息</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;">请求参数</a>
+                                    </li>
+                                    <li class="toc-item-2">
+                                        <a href="javascript:;">Query参数</a>
+                                    </li>
+                                    <li class="toc-item-2">
+                                        <a href="javascript:;">Header参数</a>
+                                    </li>
+                                    <li class="toc-item-2">
+                                        <a href="javascript:;">Body参数</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;">响应示例</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="markdown apt-target">
+                <script type="text" id="template-apt-target-tpl">
+                <h2>
+                    <em class="{{target.mark}}">[
+                        {{if target.mark == 'modifying'}}
+                        待修改
+                        {{else if target.mark == 'complated'}}
+                        已完成
+                        {{else}}
+                        开发中
+                        {{/if}}]
+                    </em>
+                    {{target.name}}<span class="metadata">更新时间：{{target.update_dtime}}</span>
+                </h2>
+                {{if target.request.description}}
+                <div class="editor-preview">
+                {{@target.request.description}}
+                </div>
+                {{/if}}
+                {{if target.target_type == 'api'}}
+                <h3 class="title"><a href="#mao1" class="maodian" id="mao1"></a> 基本信息</h3>
+                <ul>
+                    <li>
+                        <strong>接口状态：</strong> <span class="{{target.mark}}">
+                        {{if target.mark == 'modifying'}}
+                        待修改
+                        {{else if target.mark == 'complated'}}
+                        已完成
+                        {{else}}
+                        开发中
+                        {{/if}}
+                        </span>
+                    </li>
+                    <li>
+                        <strong>接口URL：</strong> <code class="span">{{target.request.url}}</code>
+                    </li>
+                    <li>
+                        <strong>请求方式：</strong> <code class="span">{{target.method}}</code>
+                    </li>
+                    {{if target.method != 'GET'}}
+                    <li>
+                        <strong>Content-Type：</strong> <code class="span">{{target.request.body.mode_text}}</code>
+                    </li>
+                    {{/if}}
+                </ul>
+                {{if target.request}}
+                <h3 class="title"><a  href="#mao2" class="maodian" id="mao2"></a> 请求参数</h3>
+                <p>接口请求参数见下表：
+                {{if (target.request.query && target.request.query.parameter.length > 0) || global_paras.query.length > 0}}
+                <h4><a  href="#mao3" class="maodian" id="mao3"></a> Query参数说明</h4>
+                <div>
+                    <table>
+
+                        <tbody>
+                        <tr>
+                            <th>
+                                <div><strong>参数名</strong></div>
+                            </th>
+                            <th>
+                                <div><strong>示例值</strong></div>
+                            </th>
+                            <th>
+                                <div><strong>是否必填</strong></div>
+                            </th>
+                            <th>
+                                <div><strong>参数描述</strong></div>
+                            </th>
+                        </tr>
+                        {{if global_paras.query}}
+                        {{each global_paras.query query i}}
+                        {{if query.key != ''}}
+                        <tr class="apt-global_paras">
+                            <td>
+                                <div>[全局参数] {{query.key}}</div>
+                            </td>
+                            <td>
+                                <div>{{query.value}}</div>
+                            </td>
+                            <td>
+                                <div>必填</div>
+                            </td>
+                            <td>
+                                <div><pre>{{query.description}}</pre></div>
+                            </td>
+                        </tr>
+                        {{/if}}
+                        {{/each}}
+                        {{/if}}
+
+                        {{each target.request.query.parameter query i}}
+                        {{if query.key != ''}}
+                        <tr>
+                            <td>
+                                <div>{{query.key}}</div>
+                            </td>
+                            <td>
+                                <div>{{query.value}}</div>
+                            </td>
+                            <td>
+                                <div>{{(query.not_null && query.not_null > 0) ?  '必填' : '选填'}}</div>
+                            </td>
+                            <td>
+                                <div><pre>{{query.description}}</pre></div>
+                            </td>
+                        </tr>
+                        {{/if}}
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+                {{/if}}
+                {{if target.request.resful && target.request.resful.parameter.length > 0}}
+                <h4><a  href="#mao12" class="maodian" id="mao12"></a> 路径参数</h4>
+                <div>
+                    <table>
+
+                        <tbody>
+                        <tr>
+                            <th>
+                                <div><strong>参数名</strong></div>
+                            </th>
+                            <th>
+                                <div><strong>示例值</strong></div>
+                            </th>
+                            <th>
+                                <div><strong>参数描述</strong></div>
+                            </th>
+                        </tr>
+                        {{each target.request.resful.parameter resful i}}
+                        {{if resful.key != ''}}
+                        <tr>
+                            <td>
+                                <div>{{resful.key}}</div>
+                            </td>
+                            <td>
+                                <div>{{resful.value}}</div>
+                            </td>
+                            <td>
+                                <div><pre>{{resful.description}}</pre></div>
+                            </td>
+                        </tr>
+                        {{/if}}
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+                {{/if}}
+                {{if (target.request.header && target.request.header.parameter.length > 0) || global_paras.header.length > 0}}
+                <h4><a  href="#mao4" class="maodian" id="mao4"></a> Header参数说明</h4>
+                <div>
+                    <table>
+
+                        <tbody>
+                        <tr>
+                            <th>
+                                <div><strong>参数名</strong></div>
+                            </th>
+                            <th>
+                                <div><strong>示例值</strong></div>
+                            </th>
+                            <th>
+                                <div><strong>是否必填</strong></div>
+                            </th>
+                            <th>
+                                <div><strong>参数描述</strong></div>
+                            </th>
+                        </tr>
+                        {{if global_paras.header}}
+                        {{each global_paras.header header i}}
+                        {{if header.key != ''}}
+                        <tr class="apt-global_paras">
+                            <td>
+                                <div>[全局参数] {{header.key}}</div>
+                            </td>
+                            <td>
+                                <div>{{header.value}}</div>
+                            </td>
+                            <td>
+                                <div>必填</div>
+                            </td>
+                            <td>
+                                <div><pre>{{header.description}}</pre></div>
+                            </td>
+                        </tr>
+                        {{/if}}
+                        {{/each}}
+                        {{/if}}
+
+                        {{each target.request.header.parameter header i}}
+                        {{if header.key != ''}}
+                        <tr>
+                            <td>
+                                <div>{{header.key}}</div>
+                            </td>
+                            <td>
+                                <div>{{header.value}}</div>
+                            </td>
+                            <td>
+                                <div>{{header.not_null && header.not_null > 0 ?  '必填' : '选填'}}</div>
+                            </td>
+                            <td>
+                                <div><pre>{{header.description}}</pre></div>
+                            </td>
+                        </tr>
+                        {{/if}}
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+                {{/if}}
+                {{if target.request.body}}
+                {{if target.request.body.mode == 'form-data' || target.request.body.mode == 'urlencoded'}}
+                {{if target.request.body.parameter.length > 0 || global_paras.body.length > 0}}
+                <h4><a  href="#mao5" class="maodian" id="mao5"></a> Body参数说明 ({{target.request.body.mode_text}})</h4>
+                <div>
+                    <table>
+
+                        <tbody>
+                        <tr>
+                            <th>
+                                <div><strong>参数名</strong></div>
+                            </th>
+                            <th>
+                                <div><strong>示例值</strong></div>
+                            </th>
+                            <th>
+                                <div><strong>是否必填</strong></div>
+                            </th>
+                            <th>
+                                <div><strong>参数描述</strong></div>
+                            </th>
+                        </tr>
+                        {{if global_paras.body}}
+                        {{each global_paras.body body i}}
+                        {{if body.key != ''}}
+                        <tr class="apt-global_paras">
+                            <td>
+                                <div>[全局参数] {{body.key}}</div>
+                            </td>
+                            <td>
+                                <div>{{body.value}}</div>
+                            </td>
+                            <td>
+                                <div>必填</div>
+                            </td>
+                            <td>
+                                <div><pre>{{body.description}}</pre></div>
+                            </td>
+                        </tr>
+                        {{/if}}
+                        {{/each}}
+                        {{/if}}
+
+                        {{each target.request.body.parameter body i}}
+                        {{if body.key != ''}}
+                        <tr>
+                            <td>
+                                <div>{{body.key}}</div>
+                            </td>
+                            <td>
+                                <div>{{body.value}}</div>
+                            </td>
+                            <td>
+                                <div>{{body.not_null && body.not_null > 0 ? '必填' : '选填'}}</div>
+                            </td>
+                            <td>
+                                <div><pre>{{body.description}}</pre></div>
+                            </td>
+                        </tr>
+                        {{/if}}
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+                {{/if}}
+                {{else}}
+                {{if target.request.body.raw}}
+                <h4><a  href="#mao5" class="maodian" id="mao5"></a> Body参数 ({{target.request.body.mode_text}})</h4>
+                <div class="editor-preview">
+                <pre><code>{{@target.request.body.raw}}</code></pre>
+                </div>
+                {{if target.request.body && target.request.body.raw_para && target.request.body.raw_para.length > 0}}
+                <h4><a  href="#mao10" class="maodian" id="mao10"></a> 参数说明</h4>
+                <div>
+                    <table>
+
+                        <tbody>
+                        <tr>
+                            <th>
+                                <div><strong>参数名</strong></div>
+                            </th>
+                            <th>
+                                <div><strong>示例值</strong></div>
+                            </th>
+                            <th>
+                                <div><strong>是否必填</strong></div>
+                            </th>
+                            <th>
+                                <div><strong>参数描述</strong></div>
+                            </th>
+                        </tr>
+                        {{each target.request.body.raw_para body i}}
+                        {{if body.key != ''}}
+                        <tr>
+                            <td>
+                                <div>{{body.key}}</div>
+                            </td>
+                            <td>
+                                <div>{{body.value}}</div>
+                            </td>
+                            <td>
+                                <div>{{body.not_null && body.not_null > 0 ? '必填' : '选填'}}</div>
+                            </td>
+                            <td>
+                                <div><pre>{{body.description}}</pre></div>
+                            </td>
+                        </tr>
+                        {{/if}}
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+                {{/if}}
+                {{/if}}
+                {{/if}}
+                {{/if}}
+                {{/if}}
+                {{if target.response}}
+                <h3 class="title"><a  href="#mao6" class="maodian" id="mao6"></a> 响应示例</h3>
+                {{if target.response && target.response.success && target.response.success.raw}}
+                <h4><a  href="#mao7" class="maodian" id="mao7"></a> 正确响应示例</h4>
+                <div class="editor-preview">
+                <pre><code>{{@target.response.success.raw}}</code></pre>
+                </div>
+                {{if target.response.success.parameter.length > 0}}
+                <h4><a  href="#mao8" class="maodian" id="mao8"></a> 参数说明</h4>
+                <div>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th>
+                                <div><strong>参数名</strong></div>
+                            </th>
+                            <th>
+                                <div><strong>示例值</strong></div>
+                            </th>
+                            <th>
+                                <div><strong>参数描述</strong></div>
+                            </th>
+                        </tr>
+                        {{each target.response.success.parameter item i}}
+                        {{if item.key != ''}}
+                        <tr>
+                            <td>
+                                <div>{{item.key}}</div>
+                            </td>
+                            <td>
+                                <div>{{item.value}}</div>
+                            </td>
+                            <td>
+                                <div><pre>{{item.description}}</pre></div>
+                            </td>
+                        </tr>
+                        {{/if}}
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+                {{/if}}
+                {{/if}}
+                {{if target.response && target.response.error && target.response.error.raw}}
+                <h4><a  href="#mao8" class="maodian" id="mao8"></a> 错误响应示例</h4>
+                <div class="editor-preview">
+                <pre><code>{{@target.response.error.raw}}</code></pre>
+                </div>
+                {{if target.response.error.parameter.length > 0}}
+                <h4><a  href="#mao9" class="maodian" id="mao9"></a> 参数说明</h4>
+                <div>
+                    <table>
+
+                        <tbody>
+                        <tr>
+                            <th>
+                                <div><strong>参数名</strong></div>
+                            </th>
+                            <th>
+                                <div><strong>示例值</strong></div>
+                            </th>
+                            <th>
+                                <div><strong>参数描述</strong></div>
+                            </th>
+                        </tr>
+                        {{each target.response.error.parameter item i}}
+                        {{if item.key != ''}}
+                        <tr>
+                            <td>
+                                <div>{{item.key}}</div>
+                            </td>
+                            <td>
+                                <div>{{item.value}}</div>
+                            </td>
+                            <td>
+                                <div><pre>{{item.description}}</pre></div>
+                            </td>
+                        </tr>
+                        {{/if}}
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+                {{/if}}
+                {{/if}}
+                {{/if}}
+                {{/if}}
+                <footer>本文档由<a href="https://docs.apipost.cn/" target="_blank">APIPOST接口调试与管理工具</a>生成</footer>
+                </script>
+            </div>
+        </div>
+    </div>
+
+    <!--图片弹窗-->
+    <div class="imgtc">
+        <img src=""/>
+    </div>
+</div>
+<script src="https://img.cdn.apipost.cn/statics/build-in/jquery/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://docs.apipost.cn/statics/marked/marked.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://docs.apipost.cn/statics/highlight/highlight.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://img.cdn.apipost.cn/cdn/art-template@4.13.2/template-web.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://docs.apipost.cn/statics/apt.min-1.0.0.js?v=0423" type="text/javascript" charset="utf-8"></script>
+<script src="https://img.cdn.apipost.cn/statics/libs/crypto-js/crypto-js.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(function() {
+                                let _menu = [{"project_id":"211304","parent_id":"2160976","target_id":"2164542","name":"\u5546\u54c1\u7ba1\u7406","method":"POST","mark":"developing","target_type":"folder","menu":[{"project_id":"211304","parent_id":"2164542","target_id":"2164544","name":"\u67e5\u8be2\u5546\u54c1\u5217\u8868","method":"POST","mark":"developing","target_type":"api","menu":[]},{"project_id":"211304","parent_id":"2164542","target_id":"2164855","name":"\u6dfb\u52a0\u5546\u54c1","method":"POST","mark":"developing","target_type":"api","menu":[]},{"project_id":"211304","parent_id":"2164542","target_id":"2164889","name":"\u5220\u9664\u5546\u54c1","method":"POST","mark":"developing","target_type":"api","menu":[]},{"project_id":"211304","parent_id":"2164542","target_id":"2164912","name":"\u4fee\u6539\u5546\u54c1\u4fe1\u606f","method":"POST","mark":"developing","target_type":"api","menu":[]},{"project_id":"211304","parent_id":"2164542","target_id":"2164998","name":"\u901a\u8fc7id\u67e5\u8be2\u5546\u54c1\u4fe1\u606f","method":"POST","mark":"developing","target_type":"api","menu":[]}]},{"project_id":"211304","parent_id":"2160976","target_id":"2164999","name":"\u7528\u6237\u7ba1\u7406","method":"POST","mark":"developing","target_type":"folder","menu":[{"project_id":"211304","parent_id":"2164999","target_id":"2160982","name":"\u7528\u6237\u767b\u5f55","method":"POST","mark":"modifying","target_type":"api","menu":[]},{"project_id":"211304","parent_id":"2164999","target_id":"2160991","name":"\u9000\u51fa\u767b\u5f55","method":"GET","mark":"developing","target_type":"api","menu":[]},{"project_id":"211304","parent_id":"2164999","target_id":"2161008","name":"\u901a\u8fc7token\u67e5\u8be2User\u4fe1\u606f","method":"GET","mark":"developing","target_type":"api","menu":[]},{"project_id":"211304","parent_id":"2164999","target_id":"2161017","name":"\u6ce8\u518c","method":"POST","mark":"developing","target_type":"api","menu":[]},{"project_id":"211304","parent_id":"2164999","target_id":"2161051","name":"\u9a8c\u8bc1\u8d26\u53f7\u548c\u90ae\u7bb1","method":"POST","mark":"developing","target_type":"api","menu":[]},{"project_id":"211304","parent_id":"2164999","target_id":"2161060","name":"\u4fee\u6539\u5bc6\u7801","method":"POST","mark":"developing","target_type":"api","menu":[]},{"project_id":"211304","parent_id":"2164999","target_id":"2161063","name":"\u5168\u67e5","method":"POST","mark":"developing","target_type":"api","menu":[]},{"project_id":"211304","parent_id":"2164999","target_id":"2161069","name":"\u5220\u9664","method":"POST","mark":"developing","target_type":"api","menu":[]},{"project_id":"211304","parent_id":"2164999","target_id":"2161091","name":"\u4fee\u6539\u4fe1\u606f","method":"POST","mark":"developing","target_type":"api","menu":[]},{"project_id":"211304","parent_id":"2164999","target_id":"2164126","name":"\u901a\u8fc7id\u67e5\u8be2\u7528\u6237\u4fe1\u606f","method":"POST","mark":"developing","target_type":"api","menu":[]}]}];
+        let _l1910839353 = {"2160982":{"project_id":"211304","parent_id":"2164999","target_id":"2160982","name":"\u7528\u6237\u767b\u5f55","method":"POST","mark":"modifying","target_type":"api","update_day":"1590249600","update_dtime":"2020-05-24 20:18:00","sort":"0","request":{"target_id":2160982,"auth":{"type":"noauth","kv":{"key":"","value":""},"bearer":{"key":""},"basic":{"username":"","password":""}},"body":{"mode":"urlencoded","parameter":[{"is_checked":1,"type":"Text","key":"user","value":"zt","not_null":1,"description":"\u8d26\u53f7"},{"is_checked":1,"type":"Text","key":"password","value":"1234","not_null":1,"description":"\u5bc6\u7801"}],"raw":"","raw_para":[]},"description":"","event":{"pre_script":"","test":""},"header":{"parameter":[]},"query":{"parameter":[]},"resful":{"parameter":[]},"url":"http:\/\/localhost:8080\/user\/login"},"response":{"success":{"raw":"{\r\n\t\"code\": 100,\r\n\t\"data\": \"87c3463be08a4ecd9e2821688d7445ce\",\r\n\t\"message\": \"\u767b\u5f55\u6210\u529f\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"100","description":"\u8bf7\u6c42\u6210\u529f"},{"is_checked":1,"type":"Text","key":"data","value":"87c3463be08a4ecd9e2821688d7445ce","description":"\u767b\u5f55\u6210\u529f\u8fd4\u56de\u7684token\u503c"},{"is_checked":1,"type":"Text","key":"message","value":"\u767b\u5f55\u6210\u529f","description":"\u8fd4\u56de\u7684\u63d0\u793a\u4fe1\u606f"}]},"error":{"raw":"{\r\n\t\"code\": 104,\r\n\t\"message\": \"\u767b\u5f55\u5931\u8d25\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"104","description":"\u8bf7\u6c42\u5931\u8d25"},{"is_checked":1,"type":"Text","key":"message","value":"\u767b\u5f55\u5931\u8d25","description":"\u8fd4\u56de\u7684\u63d0\u793a\u4fe1\u606f"}]}}},"2160991":{"project_id":"211304","parent_id":"2164999","target_id":"2160991","name":"\u9000\u51fa\u767b\u5f55","method":"GET","mark":"developing","target_type":"api","update_day":"1590249600","update_dtime":"2020-05-24 20:18:17","sort":"0","request":{"target_id":2160991,"auth":{"type":"noauth","kv":{"key":"","value":""},"bearer":{"key":""},"basic":{"username":"","password":""}},"body":{"mode":"urlencoded","parameter":[],"raw":"","raw_para":[]},"description":"","event":{"pre_script":"","test":""},"header":{"parameter":[{"is_checked":1,"type":"Text","key":"token","value":"8f93b856180d48faa3d057deeeb00dba","not_null":1,"description":"token"}]},"query":{"parameter":[]},"resful":{"parameter":[]},"url":"http:\/\/localhost:8080\/user\/view\/logout"},"response":{"error":{"raw":"{\r\n\t\"code\": 103,\r\n\t\"message\": \"\u672a\u767b\u5f55\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"103","description":"\u8bf7\u6c42\u5931\u8d25"},{"is_checked":1,"type":"Text","key":"message","value":"\u672a\u767b\u5f55","description":"\u8fd4\u56de\u7684\u63d0\u793a\u4fe1\u606f"}]},"success":{"raw":"{\r\n\t\"code\": 100,\r\n\t\"data\": true,\r\n\t\"message\": \"\u9000\u51fa\u6210\u529f\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"100","description":"\u8bf7\u6c42\u6210\u529f"},{"is_checked":1,"type":"Text","key":"data","value":"true","description":"\u5220\u9664token\u6210\u529f\u6807\u8bc6"},{"is_checked":1,"type":"Text","key":"message","value":"\u9000\u51fa\u6210\u529f","description":"\u8fd4\u56de\u7684\u63d0\u793a\u4fe1\u606f"}]}}},"2161008":{"project_id":"211304","parent_id":"2164999","target_id":"2161008","name":"\u901a\u8fc7token\u67e5\u8be2User\u4fe1\u606f","method":"GET","mark":"developing","target_type":"api","update_day":"1590249600","update_dtime":"2020-05-24 20:18:24","sort":"0","request":{"target_id":2161008,"auth":{"type":"noauth","kv":{"key":"","value":""},"bearer":{"key":""},"basic":{"username":"","password":""}},"body":{"mode":"form-data","parameter":[],"raw":"","raw_para":[]},"description":"","event":{"pre_script":"","test":""},"header":{"parameter":[{"is_checked":1,"type":"Text","key":"token","value":"f0e9ecc5ab5c4621a3de457e48a07c0d","not_null":1,"description":""}]},"query":{"parameter":[]},"resful":{"parameter":[]},"url":"http:\/\/localhost:8080\/user\/view\/getUserOfLogin"},"response":{"success":{"raw":"{\r\n\t\"code\": 100,\r\n\t\"data\": {\r\n\t\t\"email\": \"1234@1234.com\",\r\n\t\t\"id\": 19,\r\n\t\t\"password\": \"1234\",\r\n\t\t\"user\": \"zt\"\r\n\t},\r\n\t\"message\": \"\u67e5\u8be2\u7528\u6237\u4fe1\u606f\u6210\u529f\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"100","description":"\u8bf7\u6c42\u6210\u529f"},{"is_checked":1,"type":"Text","key":"data","value":"","description":"User\u5bf9\u8c61"},{"is_checked":1,"type":"Text","key":"data.email","value":"1234@1234.com","description":"\u90ae\u7bb1"},{"is_checked":1,"type":"Text","key":"data.id","value":"19","description":"id"},{"is_checked":1,"type":"Text","key":"data.password","value":"1234","description":"\u5bc6\u7801"},{"is_checked":1,"type":"Text","key":"data.user","value":"zt","description":"\u7528\u6237\u540d"},{"is_checked":1,"type":"Text","key":"message","value":"\u67e5\u8be2\u7528\u6237\u4fe1\u606f\u6210\u529f","description":"\u8fd4\u56de\u7684\u63d0\u793a\u4fe1\u606f"}]}}},"2161017":{"project_id":"211304","parent_id":"2164999","target_id":"2161017","name":"\u6ce8\u518c","method":"POST","mark":"developing","target_type":"api","update_day":"1590249600","update_dtime":"2020-05-24 20:18:32","sort":"0","request":{"target_id":2161017,"auth":{"type":"noauth","kv":{"key":"","value":""},"bearer":{"key":""},"basic":{"username":"","password":""}},"body":{"mode":"urlencoded","parameter":[{"is_checked":1,"type":"Text","key":"user","value":"admin","not_null":1,"description":"\u7528\u6237\u540d"},{"is_checked":1,"type":"Text","key":"password","value":"1234","not_null":1,"description":"\u5bc6\u7801"},{"is_checked":1,"type":"Text","key":"email","value":"1234@admin.com","not_null":1,"description":"\u90ae\u7bb1"}],"raw":"","raw_para":[]},"description":"","event":{"pre_script":"","test":""},"header":{"parameter":[]},"query":{"parameter":[]},"resful":{"parameter":[]},"url":"http:\/\/localhost:8080\/user\/register"},"response":{"success":{"raw":"{\r\n\t\"code\": 100,\r\n\t\"data\": {\r\n\t\t\"email\": \"1234@admin.com\",\r\n\t\t\"id\": 25,\r\n\t\t\"password\": \"1234\",\r\n\t\t\"user\": \"admin\"\r\n\t},\r\n\t\"message\": \"\u6ce8\u518c\u6210\u529f\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"100","description":"\u8bf7\u6c42\u6210\u529f"},{"is_checked":1,"type":"Text","key":"data","value":"","description":"User\u5bf9\u8c61"},{"is_checked":1,"type":"Text","key":"data.email","value":"1234@admin.com","description":"\u90ae\u7bb1"},{"is_checked":1,"type":"Text","key":"data.id","value":"25","description":"id"},{"is_checked":1,"type":"Text","key":"data.password","value":"1234","description":"\u5bc6\u7801"},{"is_checked":1,"type":"Text","key":"data.user","value":"admin","description":"\u7528\u6237\u540d"},{"is_checked":1,"type":"Text","key":"message","value":"\u6ce8\u518c\u6210\u529f","description":"\u8fd4\u56de\u7684\u63d0\u793a\u4fe1\u606f"}]},"error":{"raw":"{\r\n\t\"code\": 104,\r\n\t\"message\": \"\u7528\u6237\u540d\u91cd\u590d\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"104","description":"\u8bf7\u6c42\u5931\u8d25"},{"is_checked":1,"type":"Text","key":"message","value":"\u7528\u6237\u540d\u91cd\u590d","description":"\u8fd4\u56de\u7684\u63d0\u793a\u4fe1\u606f"}]}}},"2161051":{"project_id":"211304","parent_id":"2164999","target_id":"2161051","name":"\u9a8c\u8bc1\u8d26\u53f7\u548c\u90ae\u7bb1","method":"POST","mark":"developing","target_type":"api","update_day":"1590249600","update_dtime":"2020-05-24 20:18:43","sort":"0","request":{"target_id":2161051,"auth":{"type":"noauth","kv":{"key":"","value":""},"bearer":{"key":""},"basic":{"username":"","password":""}},"body":{"mode":"form-data","parameter":[{"is_checked":1,"type":"Text","key":"user","value":"admin","not_null":1,"description":"\u8d26\u53f7"},{"is_checked":1,"type":"Text","key":"email","value":"1234@admin.com","not_null":1,"description":"\u90ae\u7bb1"}],"raw":"","raw_para":[]},"description":"","event":{"pre_script":"","test":""},"header":{"parameter":[]},"query":{"parameter":[]},"resful":{"parameter":[]},"url":"http:\/\/localhost:8080\/user\/checking"},"response":{"error":{"raw":"{\r\n\t\"code\": 104,\r\n\t\"message\": \"\u7528\u6237\u540d\u6216\u90ae\u7bb1\u4e0d\u6b63\u786e\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"104","description":"\u8bf7\u6c42\u5931\u8d25"},{"is_checked":1,"type":"Text","key":"message","value":"\u7528\u6237\u540d\u6216\u90ae\u7bb1\u4e0d\u6b63\u786e","description":"\u8fd4\u56de\u7684\u63d0\u793a\u4fe1\u606f"}]},"success":{"raw":"{\r\n\t\"code\": 100,\r\n\t\"data\": {\r\n\t\t\"email\": \"1234@admin.com\",\r\n\t\t\"id\": 25,\r\n\t\t\"password\": \"1234\",\r\n\t\t\"user\": \"admin\"\r\n\t},\r\n\t\"message\": \"\u7528\u6237\u540d\u90ae\u7bb1\u6b63\u786e\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"100","description":"\u8bf7\u6c42\u6210\u529f"},{"is_checked":1,"type":"Text","key":"data","value":"","description":"\u6570\u636e"},{"is_checked":1,"type":"Text","key":"data.email","value":"1234@admin.com","description":"\u90ae\u7bb1"},{"is_checked":1,"type":"Text","key":"data.id","value":"25","description":"id"},{"is_checked":1,"type":"Text","key":"data.password","value":"1234","description":"\u5bc6\u7801"},{"is_checked":1,"type":"Text","key":"data.user","value":"admin","description":"\u8d26\u53f7"},{"is_checked":1,"type":"Text","key":"message","value":"\u7528\u6237\u540d\u90ae\u7bb1\u6b63\u786e","description":"\u63d0\u793a\u4fe1\u606f"}]}}},"2161060":{"project_id":"211304","parent_id":"2164999","target_id":"2161060","name":"\u4fee\u6539\u5bc6\u7801","method":"POST","mark":"developing","target_type":"api","update_day":"1590249600","update_dtime":"2020-05-24 20:18:50","sort":"0","request":{"target_id":2161060,"auth":{"type":"noauth","kv":{"key":"","value":""},"bearer":{"key":""},"basic":{"username":"","password":""}},"body":{"mode":"form-data","parameter":[{"is_checked":1,"type":"Text","key":"user","value":"admin","not_null":1,"description":"\u8d26\u53f7"},{"is_checked":1,"type":"Text","key":"password","value":"1234","not_null":1,"description":"\u5bc6\u7801"}],"raw":"","raw_para":[]},"description":"","event":{"pre_script":"","test":""},"header":{"parameter":[]},"query":{"parameter":[]},"resful":{"parameter":[]},"url":"http:\/\/localhost:8080\/user\/updatePwd"},"response":{"error":{"raw":"{\r\n\t\"code\": 104,\r\n\t\"message\": \"\u4fee\u6539\u5931\u8d25\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"104","description":"\u8bf7\u6c42\u5931\u8d25"},{"is_checked":1,"type":"Text","key":"message","value":"\u4fee\u6539\u5931\u8d25","description":"\u8fd4\u56de\u7684\u63d0\u793a\u4fe1\u606f"}]},"success":{"raw":"{\r\n\t\"code\": 100,\r\n\t\"data\": {\r\n\t\t\"email\": \"1234@admin.com\",\r\n\t\t\"id\": 25,\r\n\t\t\"password\": \"1234\",\r\n\t\t\"user\": \"admin\"\r\n\t},\r\n\t\"message\": \"\u4fee\u6539\u6210\u529f\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"100","description":"\u8bf7\u6c42\u6210\u529f"},{"is_checked":1,"type":"Text","key":"data","value":"","description":"User\u5bf9\u8c61"},{"is_checked":1,"type":"Text","key":"data.email","value":"1234@admin.com","description":"\u90ae\u7bb1"},{"is_checked":1,"type":"Text","key":"data.id","value":"25","description":"id"},{"is_checked":1,"type":"Text","key":"data.password","value":"1234","description":"\u5bc6\u7801"},{"is_checked":1,"type":"Text","key":"data.user","value":"admin","description":"\u7528\u6237\u540d"},{"is_checked":1,"type":"Text","key":"message","value":"\u4fee\u6539\u6210\u529f","description":"\u8fd4\u56de\u7684\u63d0\u793a\u4fe1\u606f"}]}}},"2161063":{"project_id":"211304","parent_id":"2164999","target_id":"2161063","name":"\u5168\u67e5","method":"POST","mark":"developing","target_type":"api","update_day":"1590249600","update_dtime":"2020-05-24 20:18:58","sort":"0","request":{"target_id":2161063,"auth":{"type":"noauth","kv":{"key":"","value":""},"bearer":{"key":""},"basic":{"username":"","password":""}},"body":{"mode":"form-data","parameter":[{"is_checked":1,"type":"Text","key":"pageNow","value":"1","not_null":1,"description":"\u9875\u7801"},{"is_checked":1,"type":"Text","key":"pageSize","value":"3","not_null":1,"description":"\u5f53\u524d\u9875\u7801\u663e\u793a\u6570\u91cf"}],"raw":"","raw_para":[]},"description":"","event":{"pre_script":"","test":""},"header":{"parameter":[{"is_checked":1,"type":"Text","key":"token","value":"7a9432abd7894208b572aa262231e04a","not_null":1,"description":"token"}]},"query":{"parameter":[]},"resful":{"parameter":[]},"url":"http:\/\/localhost:8080\/user\/view\/queryAll"},"response":{"success":{"raw":"{\r\n\t\"code\": 100,\r\n\t\"data\": {\r\n\t\t\"endRow\": 3,\r\n\t\t\"firstPage\": 1,\r\n\t\t\"hasNextPage\": true,\r\n\t\t\"hasPreviousPage\": false,\r\n\t\t\"isFirstPage\": true,\r\n\t\t\"isLastPage\": false,\r\n\t\t\"lastPage\": 6,\r\n\t\t\"list\": [\r\n\t\t\t{\r\n\t\t\t\t\"email\": \"123@1230.com\",\r\n\t\t\t\t\"id\": 2,\r\n\t\t\t\t\"password\": \"123456\",\r\n\t\t\t\t\"user\": \"\u674e\u56db\"\r\n\t\t\t},\r\n\t\t\t{\r\n\t\t\t\t\"email\": \"1234\",\r\n\t\t\t\t\"id\": 5,\r\n\t\t\t\t\"password\": \"1234\",\r\n\t\t\t\t\"user\": \"1234\"\r\n\t\t\t},\r\n\t\t\t{\r\n\t\t\t\t\"email\": \"123\",\r\n\t\t\t\t\"id\": 7,\r\n\t\t\t\t\"password\": \"123\",\r\n\t\t\t\t\"user\": \"123455\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"navigateFirstPage\": 1,\r\n\t\t\"navigateLastPage\": 6,\r\n\t\t\"navigatePages\": 8,\r\n\t\t\"navigatepageNums\": [\r\n\t\t\t1,\r\n\t\t\t2,\r\n\t\t\t3,\r\n\t\t\t4,\r\n\t\t\t5,\r\n\t\t\t6\r\n\t\t],\r\n\t\t\"nextPage\": 2,\r\n\t\t\"pageNum\": 1,\r\n\t\t\"pageSize\": 3,\r\n\t\t\"pages\": 6,\r\n\t\t\"prePage\": 0,\r\n\t\t\"size\": 3,\r\n\t\t\"startRow\": 1,\r\n\t\t\"total\": 16\r\n\t},\r\n\t\"message\": \"\u5168\u67e5\u6210\u529f\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"100","description":"\u8bf7\u6c42\u6210\u529f"},{"is_checked":1,"type":"Text","key":"data","value":"","description":""},{"is_checked":1,"type":"Text","key":"data.endRow","value":"5","description":"\u9875\u6570\u6700\u540e\u4e00\u6761\u7684\u6761\u6570"},{"is_checked":1,"type":"Text","key":"data.firstPage","value":"1","description":"\u5f53\u524d\u9875\u6570"},{"is_checked":1,"type":"Text","key":"data.hasNextPage","value":"true","description":"\u662f\u5426\u6709\u4e0b\u4e00\u9875"},{"is_checked":1,"type":"Text","key":"data.hasPreviousPage","value":"false","description":""},{"is_checked":1,"type":"Text","key":"data.isFirstPage","value":"true","description":"\u662f\u5426\u662f\u7b2c\u4e00\u9875"},{"is_checked":1,"type":"Text","key":"data.isLastPage","value":"false","description":"\u662f\u5426\u662f\u6700\u540e\u4e00\u9875"},{"is_checked":1,"type":"Text","key":"data.lastPage","value":"4","description":"\u6700\u540e\u4e00\u9875\u7684\u9875\u7801"},{"is_checked":1,"type":"Text","key":"data.nextPage","value":"2","description":"\u4e0b\u4e00\u6761\u9875\u7801"},{"is_checked":1,"type":"Text","key":"data.pageNum","value":"1","description":""},{"is_checked":1,"type":"Text","key":"data.pageSize","value":"5","description":"\u4e00\u9875\u663e\u793a\u7684\u6761\u6570"},{"is_checked":1,"type":"Text","key":"data.pages","value":"4","description":""},{"is_checked":1,"type":"Text","key":"data.size","value":"5","description":""},{"is_checked":1,"type":"Text","key":"data.startRow","value":"1","description":""},{"is_checked":1,"type":"Text","key":"data.total","value":"16","description":"\u4e00\u5171\u7684\u6761\u6570"},{"is_checked":1,"type":"Text","key":"message","value":"\u5168\u67e5\u6210\u529f","description":"\u8fd4\u56de\u7684\u63d0\u793a\u4fe1\u606f"}]}}},"2161069":{"project_id":"211304","parent_id":"2164999","target_id":"2161069","name":"\u5220\u9664","method":"POST","mark":"developing","target_type":"api","update_day":"1590249600","update_dtime":"2020-05-24 20:19:03","sort":"0","request":{"target_id":2161069,"auth":{"type":"noauth","kv":{"key":"","value":""},"bearer":{"key":""},"basic":{"username":"","password":""}},"body":{"mode":"form-data","parameter":[{"is_checked":1,"type":"Text","key":"id","value":"8","not_null":1,"description":"ID"}],"raw":"","raw_para":[]},"description":"","event":{"pre_script":"","test":""},"header":{"parameter":[{"is_checked":1,"type":"Text","key":"token","value":"00587db5c4c64b3aa671355e6bcf71e1","not_null":1,"description":"token"}]},"query":{"parameter":[]},"resful":{"parameter":[]},"url":"http:\/\/localhost:8080\/user\/view\/del"},"response":{"success":{"raw":"{\r\n\t\"code\": 100,\r\n\t\"data\": {\r\n\t\t\"email\": \"1111\",\r\n\t\t\"id\": 22,\r\n\t\t\"password\": \"1111\",\r\n\t\t\"user\": \"11214\"\r\n\t},\r\n\t\"message\": \"\u5220\u9664\u6210\u529f\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"100","description":"\u8bf7\u6c42\u6210\u529f"},{"is_checked":1,"type":"Text","key":"data","value":"","description":"User\u5bf9\u8c61"},{"is_checked":1,"type":"Text","key":"data.email","value":"1111","description":"\u90ae\u7bb1"},{"is_checked":1,"type":"Text","key":"data.id","value":"22","description":"id"},{"is_checked":1,"type":"Text","key":"data.password","value":"1111","description":"\u5bc6\u7801"},{"is_checked":1,"type":"Text","key":"data.user","value":"11214","description":"\u7528\u6237\u540d"},{"is_checked":1,"type":"Text","key":"message","value":"\u5220\u9664\u6210\u529f","description":"\u8fd4\u56de\u7684\u63d0\u793a\u4fe1\u606f"}]},"error":{"raw":"{\r\n\t\"code\": 104,\r\n\t\"message\": \"\u5220\u9664\u5931\u8d25\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"104","description":"\u8bf7\u6c42\u5931\u8d25"},{"is_checked":1,"type":"Text","key":"message","value":"\u5220\u9664\u5931\u8d25","description":"\u8fd4\u56de\u7684\u63d0\u793a\u4fe1\u606f"}]}}},"2161091":{"project_id":"211304","parent_id":"2164999","target_id":"2161091","name":"\u4fee\u6539\u4fe1\u606f","method":"POST","mark":"developing","target_type":"api","update_day":"1590249600","update_dtime":"2020-05-24 20:19:09","sort":"0","request":{"target_id":2161091,"auth":{"type":"noauth","kv":{"key":"","value":""},"bearer":{"key":""},"basic":{"username":"","password":""}},"body":{"mode":"form-data","parameter":[{"is_checked":1,"type":"Text","key":"user","value":"\u674e\u56db","not_null":1,"description":"\u8d26\u53f7"},{"is_checked":1,"type":"Text","key":"password","value":"123456","not_null":1,"description":"\u5bc6\u7801"},{"is_checked":1,"type":"Text","key":"email","value":"123@1230.com","not_null":1,"description":"\u90ae\u7bb1"},{"is_checked":1,"type":"Text","key":"id","value":"2","not_null":1,"description":"ID"}],"raw":"","raw_para":[]},"description":"","event":{"pre_script":"","test":""},"header":{"parameter":[{"is_checked":1,"type":"Text","key":"token","value":"d7fd80c02d6f4a3ca20fca55f586ab17","not_null":1,"description":"Token"}]},"query":{"parameter":[]},"resful":{"parameter":[]},"url":"http:\/\/localhost:8080\/user\/view\/updateUser"},"response":{"success":{"raw":"{\r\n\t\"code\": 100,\r\n\t\"data\": {\r\n\t\t\"email\": \"123@1230.com\",\r\n\t\t\"id\": 2,\r\n\t\t\"password\": \"123456\",\r\n\t\t\"user\": \"\u674e\u56db\"\r\n\t},\r\n\t\"message\": \"\u4fee\u6539\u6210\u529f\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"100","description":"\u8bf7\u6c42\u6210\u529f"},{"is_checked":1,"type":"Text","key":"data","value":"","description":"\u4fee\u6539\u540e\u7684\u5bf9\u8c61"},{"is_checked":1,"type":"Text","key":"data.email","value":"123@1230.com","description":"\u90ae\u7bb1"},{"is_checked":1,"type":"Text","key":"data.id","value":"2","description":"id"},{"is_checked":1,"type":"Text","key":"data.password","value":"123456","description":"\u5bc6\u7801"},{"is_checked":1,"type":"Text","key":"data.user","value":"\u674e\u56db","description":"\u7528\u6237\u540d"},{"is_checked":1,"type":"Text","key":"message","value":"\u4fee\u6539\u6210\u529f","description":"\u8fd4\u56de\u7684\u63d0\u793a\u4fe1\u606f"}]},"error":{"raw":"{\r\n\t\"code\": 104,\r\n\t\"message\": \"\u4fee\u6539\u5931\u8d25\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"104","description":"\u8bf7\u6c42\u5931\u8d25"},{"is_checked":1,"type":"Text","key":"message","value":"\u4fee\u6539\u5931\u8d25","description":"\u8fd4\u56de\u7684\u63d0\u793a\u4fe1\u606f"}]}}},"2164126":{"project_id":"211304","parent_id":"2164999","target_id":"2164126","name":"\u901a\u8fc7id\u67e5\u8be2\u7528\u6237\u4fe1\u606f","method":"POST","mark":"developing","target_type":"api","update_day":"1590249600","update_dtime":"2020-05-24 20:19:17","sort":"0","request":{"target_id":2164126,"auth":{"type":"noauth","kv":{"key":"","value":""},"bearer":{"key":""},"basic":{"username":"","password":""}},"body":{"mode":"form-data","parameter":[{"is_checked":1,"type":"Text","key":"id","value":"2","not_null":1,"description":"ID"}],"raw":"","raw_para":[]},"description":"","event":{"pre_script":"","test":""},"header":{"parameter":[{"is_checked":1,"type":"Text","key":"token","value":"a1d5915386d9409abe60fbe5b1d330af","not_null":1,"description":""}]},"query":{"parameter":[]},"resful":{"parameter":[]},"url":"http:\/\/localhost:8080\/user\/view\/queryIdByUser"},"response":{"error":{"raw":"{\r\n\t\"code\": 104,\r\n\t\"message\": \"\u67e5\u8be2\u5931\u8d25\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"104","description":"\u8bf7\u6c42\u5931\u8d25"},{"is_checked":1,"type":"Text","key":"message","value":"\u67e5\u8be2\u5931\u8d25","description":"\u8fd4\u56de\u7684\u63d0\u793a\u4fe1\u606f"}]},"success":{"raw":"{\r\n\t\"code\": 100,\r\n\t\"data\": {\r\n\t\t\"email\": \"123@1230.com\",\r\n\t\t\"id\": 2,\r\n\t\t\"password\": \"123456\",\r\n\t\t\"user\": \"\u674e\u56db\"\r\n\t},\r\n\t\"message\": \"\u67e5\u8be2\u6210\u529f\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"100","description":"\u8bf7\u6c42\u6210\u529f"},{"is_checked":1,"type":"Text","key":"data","value":"","description":"\u767b\u5f55\u6210\u529f\u8fd4\u56de\u7684token\u503c"},{"is_checked":1,"type":"Text","key":"data.email","value":"123@1230.com","description":"\u90ae\u7bb1"},{"is_checked":1,"type":"Text","key":"data.id","value":"2","description":"id"},{"is_checked":1,"type":"Text","key":"data.password","value":"123456","description":"\u5bc6\u7801"},{"is_checked":1,"type":"Text","key":"data.user","value":"\u674e\u56db","description":"\u8d26\u53f7"},{"is_checked":1,"type":"Text","key":"message","value":"\u67e5\u8be2\u6210\u529f","description":"\u8fd4\u56de\u7684\u63d0\u793a\u4fe1\u606f"}]}}},"2164544":{"project_id":"211304","parent_id":"2164542","target_id":"2164544","name":"\u67e5\u8be2\u5546\u54c1\u5217\u8868","method":"POST","mark":"developing","target_type":"api","update_day":"1590249600","update_dtime":"2020-05-24 13:32:51","sort":"0","request":{"target_id":2164544,"auth":{"type":"noauth","kv":{"key":"","value":""},"bearer":{"key":""},"basic":{"username":"","password":""}},"body":{"mode":"form-data","parameter":[{"is_checked":1,"type":"Text","key":"pageNow","value":"1","not_null":1,"description":"\u9875\u7801"},{"is_checked":1,"type":"Text","key":"pageSize","value":"3","not_null":1,"description":"\u4e00\u9875\u663e\u793a\u7684\u6761\u6570"}],"raw":"","raw_para":[]},"description":"","event":{"pre_script":"","test":""},"header":{"parameter":[]},"query":{"parameter":[]},"resful":{"parameter":[]},"url":"http:\/\/localhost:8080\/goods\/queryAllGoods"},"response":{"success":{"raw":"{\r\n\t\"code\": 100,\r\n\t\"data\": {\r\n\t\t\"endRow\": 1,\r\n\t\t\"firstPage\": 1,\r\n\t\t\"hasNextPage\": false,\r\n\t\t\"hasPreviousPage\": false,\r\n\t\t\"isFirstPage\": true,\r\n\t\t\"isLastPage\": true,\r\n\t\t\"lastPage\": 1,\r\n\t\t\"list\": [\r\n\t\t\t{\r\n\t\t\t\t\"id\": 1,\r\n\t\t\t\t\"name\": \"\u94c5\u7b14\",\r\n\t\t\t\t\"price\": 3,\r\n\t\t\t\t\"type\": \"\u6587\u5177\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"navigateFirstPage\": 1,\r\n\t\t\"navigateLastPage\": 1,\r\n\t\t\"navigatePages\": 8,\r\n\t\t\"navigatepageNums\": [\r\n\t\t\t1\r\n\t\t],\r\n\t\t\"nextPage\": 0,\r\n\t\t\"pageNum\": 1,\r\n\t\t\"pageSize\": 3,\r\n\t\t\"pages\": 1,\r\n\t\t\"prePage\": 0,\r\n\t\t\"size\": 1,\r\n\t\t\"startRow\": 1,\r\n\t\t\"total\": 1\r\n\t},\r\n\t\"message\": \"\u67e5\u8be2\u6210\u529f\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"100","description":"\u8bf7\u6c42\u6210\u529f"},{"is_checked":1,"type":"Text","key":"data","value":"","description":"User\u5bf9\u8c61"},{"is_checked":1,"type":"Text","key":"data.endRow","value":"1","description":"\u9875\u6570\u6700\u540e\u4e00\u6761\u7684\u6761\u6570"},{"is_checked":1,"type":"Text","key":"data.firstPage","value":"1","description":"\u5f53\u524d\u9875\u6570"},{"is_checked":1,"type":"Text","key":"data.hasNextPage","value":"false","description":"\u662f\u5426\u6709\u4e0b\u4e00\u9875"},{"is_checked":1,"type":"Text","key":"data.hasPreviousPage","value":"false","description":""},{"is_checked":1,"type":"Text","key":"data.isFirstPage","value":"true","description":"\u662f\u5426\u662f\u7b2c\u4e00\u9875"},{"is_checked":1,"type":"Text","key":"data.isLastPage","value":"true","description":"\u662f\u5426\u662f\u6700\u540e\u4e00\u9875"},{"is_checked":1,"type":"Text","key":"data.lastPage","value":"1","description":"\u6700\u540e\u4e00\u9875\u7684\u9875\u7801"},{"is_checked":1,"type":"Text","key":"data.list","value":"","description":"\u5546\u54c1\u5217\u8868"},{"is_checked":1,"type":"Text","key":"data.nextPage","value":"0","description":"\u4e0b\u4e00\u6761\u9875\u7801"},{"is_checked":1,"type":"Text","key":"data.pageNum","value":"1","description":""},{"is_checked":1,"type":"Text","key":"data.pageSize","value":"3","description":"\u4e00\u9875\u663e\u793a\u7684\u6761\u6570"},{"is_checked":1,"type":"Text","key":"data.total","value":"1","description":"\u4e00\u5171\u7684\u6761\u6570"},{"is_checked":1,"type":"Text","key":"message","value":"\u67e5\u8be2\u6210\u529f","description":"\u8fd4\u56de\u7684\u63d0\u793a\u4fe1\u606f"}]}}},"2164855":{"project_id":"211304","parent_id":"2164542","target_id":"2164855","name":"\u6dfb\u52a0\u5546\u54c1","method":"POST","mark":"developing","target_type":"api","update_day":"1590249600","update_dtime":"2020-05-24 18:30:45","sort":"0","request":{"target_id":2164855,"auth":{"type":"noauth","kv":{"key":"","value":""},"bearer":{"key":""},"basic":{"username":"","password":""}},"body":{"mode":"form-data","parameter":[{"is_checked":1,"type":"Text","key":"number","value":"1748","not_null":1,"description":"\u8ba2\u5355\u7f16\u53f7"},{"is_checked":1,"type":"Text","key":"name","value":"\u94a2\u7b14","not_null":1,"description":"\u5546\u54c1\u540d"},{"is_checked":1,"type":"Text","key":"price","value":"15","not_null":1,"description":"\u4ef7\u683c"},{"is_checked":1,"type":"Text","key":"type","value":"\u6587\u5177","not_null":1,"description":"\u5546\u54c1\u7c7b\u578b"}],"raw":"","raw_para":[]},"description":"","event":{"pre_script":"","test":""},"header":{"parameter":[]},"query":{"parameter":[]},"resful":{"parameter":[]},"url":"http:\/\/localhost:8080\/goods\/addGoods"},"response":{"success":{"raw":"{\r\n\t\"code\": 100,\r\n\t\"data\": {\r\n\t\t\"id\": 5,\r\n\t\t\"name\": \"\u94a2\u7b14\",\r\n\t\t\"number\": 1748,\r\n\t\t\"price\": 15,\r\n\t\t\"type\": \"\u6587\u5177\"\r\n\t},\r\n\t\"message\": \"\u6dfb\u52a0\u6210\u529f\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"100","description":"\u8bf7\u6c42\u6210\u529f"},{"is_checked":1,"type":"Text","key":"data","value":"","description":"\u6dfb\u52a0\u7684\u6570\u636e\u96c6\u5408"},{"is_checked":1,"type":"Text","key":"data.id","value":"5","description":""},{"is_checked":1,"type":"Text","key":"data.name","value":"\u94a2\u7b14","description":""},{"is_checked":1,"type":"Text","key":"data.number","value":"1748","description":""},{"is_checked":1,"type":"Text","key":"data.price","value":"15","description":""},{"is_checked":1,"type":"Text","key":"data.type","value":"\u6587\u5177","description":""},{"is_checked":1,"type":"Text","key":"message","value":"\u6dfb\u52a0\u6210\u529f","description":"\u63d0\u793a\u4fe1\u606f"}]},"error":{"raw":"{\r\n\t\"code\": 104,\r\n\t\"message\": \"\u8ba2\u5355\u7f16\u53f7\u91cd\u590d\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"104","description":"\u8bf7\u6c42\u5931\u8d25"},{"is_checked":1,"type":"Text","key":"message","value":"\u8ba2\u5355\u7f16\u53f7\u91cd\u590d","description":"\u63d0\u793a\u4fe1\u606f"}]}}},"2164889":{"project_id":"211304","parent_id":"2164542","target_id":"2164889","name":"\u5220\u9664\u5546\u54c1","method":"POST","mark":"developing","target_type":"api","update_day":"1590249600","update_dtime":"2020-05-24 18:48:00","sort":"0","request":{"target_id":2164889,"auth":{"type":"noauth","kv":{"key":"","value":""},"bearer":{"key":""},"basic":{"username":"","password":""}},"body":{"mode":"form-data","parameter":[{"is_checked":1,"type":"Text","key":"number","value":"1015","not_null":1,"description":"\u8ba2\u5355\u7f16\u53f7"}],"raw":"","raw_para":[]},"description":"","event":{"pre_script":"","test":""},"header":{"parameter":[]},"query":{"parameter":[]},"resful":{"parameter":[]},"url":"http:\/\/localhost:8080\/goods\/delNumber"},"response":{"success":{"raw":"{\r\n\t\"code\": 100,\r\n\t\"data\": {\r\n\t\t\"id\": 2,\r\n\t\t\"name\": \"\u6a61\u76ae\",\r\n\t\t\"number\": 1015,\r\n\t\t\"price\": 1,\r\n\t\t\"type\": \"\u6587\u5177\"\r\n\t},\r\n\t\"message\": \"\u5220\u9664\u6210\u529f\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"100","description":"\u8bf7\u6c42\u6210\u529f"},{"is_checked":1,"type":"Text","key":"data","value":"","description":"\u5220\u9664\u7684\u6570\u636e\u96c6\u5408"},{"is_checked":1,"type":"Text","key":"data.id","value":"2","description":""},{"is_checked":1,"type":"Text","key":"data.name","value":"\u6a61\u76ae","description":""},{"is_checked":1,"type":"Text","key":"data.number","value":"1015","description":""},{"is_checked":1,"type":"Text","key":"data.price","value":"1","description":""},{"is_checked":1,"type":"Text","key":"data.type","value":"\u6587\u5177","description":""},{"is_checked":1,"type":"Text","key":"message","value":"\u5220\u9664\u6210\u529f","description":"\u63d0\u793a\u4fe1\u606f"}]},"error":{"raw":"{\r\n\t\"code\": 104,\r\n\t\"message\": \"\u5220\u9664\u5931\u8d25\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"104","description":"\u8bf7\u6c42\u5931\u8d25"},{"is_checked":1,"type":"Text","key":"message","value":"\u5220\u9664\u5931\u8d25","description":"\u63d0\u793a\u4fe1\u606f"}]}}},"2164912":{"project_id":"211304","parent_id":"2164542","target_id":"2164912","name":"\u4fee\u6539\u5546\u54c1\u4fe1\u606f","method":"POST","mark":"developing","target_type":"api","update_day":"1590249600","update_dtime":"2020-05-24 19:15:41","sort":"0","request":{"target_id":2164912,"auth":{"type":"noauth","kv":{"key":"","value":""},"bearer":{"key":""},"basic":{"username":"","password":""}},"body":{"mode":"form-data","parameter":[{"is_checked":1,"type":"Text","key":"number","value":"1999","not_null":1,"description":"\u8ba2\u5355\u7f16\u53f7"},{"is_checked":1,"type":"Text","key":"name","value":"\u94a2\u7b14","not_null":1,"description":"\u5546\u54c1\u540d"},{"is_checked":1,"type":"Text","key":"price","value":"16","not_null":1,"description":"\u4ef7\u683c"},{"is_checked":1,"type":"Text","key":"type","value":"\u6587\u5177","not_null":1,"description":"\u7c7b\u578b"},{"is_checked":1,"type":"Text","key":"id","value":"5","not_null":1,"description":"\u5546\u54c1\u7f16\u53f7"}],"raw":"","raw_para":[]},"description":"","event":{"pre_script":"","test":""},"header":{"parameter":[]},"query":{"parameter":[]},"resful":{"parameter":[]},"url":"http:\/\/localhost:8080\/goods\/updateGoods"},"response":{"success":{"raw":"{\r\n\t\"code\": 100,\r\n\t\"data\": {\r\n\t\t\"id\": 5,\r\n\t\t\"name\": \"\u94a2\u7b14\",\r\n\t\t\"number\": 1999,\r\n\t\t\"price\": 16,\r\n\t\t\"type\": \"\u6587\u5177\"\r\n\t},\r\n\t\"message\": \"\u4fee\u6539\u6210\u529f\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"100","description":"\u8bf7\u6c42\u6210\u529f"},{"is_checked":1,"type":"Text","key":"data","value":"","description":"\u4fee\u6539\u7684\u6570\u636e\u96c6\u5408"},{"is_checked":1,"type":"Text","key":"data.id","value":"5","description":""},{"is_checked":1,"type":"Text","key":"data.name","value":"\u94a2\u7b14","description":""},{"is_checked":1,"type":"Text","key":"data.number","value":"1999","description":""},{"is_checked":1,"type":"Text","key":"data.price","value":"16","description":""},{"is_checked":1,"type":"Text","key":"data.type","value":"\u6587\u5177","description":""},{"is_checked":1,"type":"Text","key":"message","value":"\u4fee\u6539\u6210\u529f","description":"\u63d0\u793a\u4fe1\u606f"}]}}},"2164998":{"project_id":"211304","parent_id":"2164542","target_id":"2164998","name":"\u901a\u8fc7id\u67e5\u8be2\u5546\u54c1\u4fe1\u606f","method":"POST","mark":"developing","target_type":"api","update_day":"1590249600","update_dtime":"2020-05-24 20:15:46","sort":"0","request":{"target_id":2164998,"auth":{"type":"noauth","kv":{"key":"","value":""},"bearer":{"key":""},"basic":{"username":"","password":""}},"body":{"mode":"form-data","parameter":[{"is_checked":1,"type":"Text","key":"id","value":"1","not_null":1,"description":""}],"raw":"","raw_para":[]},"description":"","event":{"pre_script":"","test":""},"header":{"parameter":[]},"query":{"parameter":[]},"resful":{"parameter":[]},"url":"http:\/\/localhost:8080\/goods\/queryId"},"response":{"success":{"raw":"{\r\n\t\"code\": 100,\r\n\t\"data\": {\r\n\t\t\"id\": 1,\r\n\t\t\"name\": \"\u94c5\u7b14\",\r\n\t\t\"number\": 1000,\r\n\t\t\"price\": 3,\r\n\t\t\"type\": \"\u6587\u5177\"\r\n\t},\r\n\t\"message\": \"\u67e5\u8be2\u6210\u529f\"\r\n}","parameter":[{"is_checked":1,"type":"Text","key":"code","value":"100","description":"\u8bf7\u6c42\u6210\u529f"},{"is_checked":1,"type":"Text","key":"data","value":"","description":"\u67e5\u8be2\u7684\u6570\u636e\u96c6\u5408"},{"is_checked":1,"type":"Text","key":"data.id","value":"1","description":""},{"is_checked":1,"type":"Text","key":"data.name","value":"\u94c5\u7b14","description":""},{"is_checked":1,"type":"Text","key":"data.number","value":"1000","description":""},{"is_checked":1,"type":"Text","key":"data.price","value":"3","description":""},{"is_checked":1,"type":"Text","key":"data.type","value":"\u6587\u5177","description":""},{"is_checked":1,"type":"Text","key":"message","value":"\u67e5\u8be2\u6210\u529f","description":"\u63d0\u793a\u4fe1\u606f"}]}}}};
+        let _global_paras = null;
+        apt.init(_menu, _l1910839353, _global_paras);
+    })
+</script>
+<!-- 百度统计 -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?a046ce178828e393614822a297b8d296";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- 360统计 -->
+<script>
+    (function(){
+        var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?07ef9520f5511356899444a093d03ded":"https://jspassport.ssl.qhimg.com/11.0.1.js?07ef9520f5511356899444a093d03ded";
+        document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+</script>
+<span style="display: none;"><script type="text/javascript" src="https://s23.cnzz.com/z_stat.php?id=1276797738&web_id=1276797738"></script></span>
+</body>
+</html>

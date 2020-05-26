@@ -41,6 +41,18 @@
           </tr>
         </tbody>
       </table>
+      <!--分页-->
+      <div class="page">
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          class="page_el"
+          @current-change="handleCurrentChange"
+          :page-count="this.lastPage"
+          :hide-on-single-page="!(lastPage > 1)"
+        >
+        </el-pagination>
+      </div>
     </div>
 
     <!--修改-->
@@ -66,7 +78,7 @@
           :placeholder="oneUserList.password"
           v-model="password"
           show-password
-        ></el-input>
+        />
       </div>
       <div class="ite">
         <span><i>*</i> 邮箱</span>
@@ -107,21 +119,75 @@ export default {
       email: "",
       isDisabled: false,
       //点击编辑的单用户数组
-      oneUserList: []
+      oneUserList: [],
+      // 当前页数
+      pageNow: 1,
+      //每页显示数量
+      pageSize: 7,
+      //最后一页的页码
+      lastPage: 1
     };
   },
   created() {
-    this.getUserAll();
+    this.InitGetUserAll();
   },
   methods: {
-    //获取全部信息
-    getUserAll() {
+    //分页
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+      this.pageNow = val;
+      this.getUserAll(this.pageNow);
+    },
+
+    //获取全部信息(页码)
+    getUserAll(pageNow) {
       axios({
-        url: "https://www.whbqd.xyz/Login/UserAll",
-        methods: "get"
+        url: "http://localhost:8080/user/view/queryAll",
+        method: "post",
+        headers: {
+          token: window.localStorage.getItem("token")
+        },
+        params: {
+          pageNow,
+          pageSize: this.pageSize
+        }
       })
         .then(res => {
-          this.UserList = res.data.userList;
+            if(res.data.code === 100) {
+                this.UserList = res.data.data.list;
+                this.lastPage = res.data.data.lastPage;
+            } else if(res.data.code=== 103){
+                window.localStorage.removeItem("token");
+                this.$message.error(res.data.message);
+            }
+          console.log(res);
+        })
+        .catch(err => {
+          err;
+          this.$message.error("服务器超时");
+        });
+    },
+    //获取全部信息(初始化)
+    InitGetUserAll() {
+      axios({
+        url: "http://localhost:8080/user/view/queryAll",
+        method: "post",
+        headers: {
+          token: window.localStorage.getItem("token")
+        },
+        params: {
+          pageNow: 1,
+          pageSize: this.pageSize
+        }
+      })
+        .then(res => {
+            if(res.data.code === 100) {
+                this.UserList = res.data.data.list;
+                this.lastPage = res.data.data.lastPage;
+            } else if(res.data.code=== 103){
+                window.localStorage.removeItem("token");
+                this.$message.error(res.data.message);
+            }
           console.log(res);
         })
         .catch(err => {
@@ -146,19 +212,22 @@ export default {
     // 根据id删除行
     cutout(id) {
       axios({
-        url: "https://www.whbqd.xyz/Login/delete",
-        methods: "get",
+        url: " http://localhost:8080/user/view/del",
+        method: "post",
+        headers: {
+          token: window.localStorage.getItem("token")
+        },
         params: {
           id
         }
       })
         .then(res => {
           console.log(res);
-          if (res.data.msg) {
-            this.$message.success("删除成功!!!");
-            this.getUserAll();
+          if (res.data.code === 100) {
+            this.$message.success(res.data.message);
+            this.getUserAll(this.pageNow);
           } else {
-            this.$message.error("删除失败!!!");
+            this.$message.error(res.data.message);
           }
         })
         .catch(err => {
@@ -166,20 +235,21 @@ export default {
           this.$message.error("服务器超时!!!");
         });
     },
-    // 修改
+    // 修改卡中显示旧信息
     reviseClick(id) {
       $(".modify").fadeToggle(300);
       this.id = id;
       axios({
-        url: "https://www.whbqd.xyz/Login/idAll",
-        methods: "post",
+        url: "http://localhost:8080/user/view/queryIdByUser",
+        method: "post",
+        headers: { token: window.localStorage.getItem("token") },
         params: {
           id
         }
       })
         .then(res => {
           console.log(res);
-          this.oneUserList = res.data;
+          this.oneUserList = res.data.data;
         })
         .catch(err => {
           console.log(err);
@@ -205,8 +275,11 @@ export default {
       }
       // 修改 信息
       axios({
-        url: "https://www.whbqd.xyz/Login/reviseByid",
-        methods: "post",
+        url: "http://localhost:8080/user/view/updateUser",
+        method: "post",
+        headers: {
+          token: window.localStorage.getItem("token")
+        },
         params: {
           id,
           user: this.user,
@@ -216,13 +289,15 @@ export default {
       })
         .then(res => {
           console.log(res);
-          if (res.data) {
-            this.$message.success("修改成功!");
+          if (res.data.code === 100) {
+            this.$message.success(res.data.message);
             $(".modify").fadeToggle(300);
-            this.getUserAll();
+            this.getUserAll(this.pageNow);
             this.user = "";
             this.password = "";
             this.email = "";
+          } else {
+            this.$message.success(res.data.message);
           }
         })
         .catch(err => {
@@ -251,16 +326,17 @@ export default {
     height: 20px;
     line-height: 20px;
     margin-bottom: 10px;
+    font-size: 20px;
     padding-left: 3px;
   }
   /*表格div*/
   .user {
-    overflow-x: hidden;
-    overflow-y: auto;
+    /*overflow-x: hidden;*/
+    /*overflow-y: auto;*/
     height: 95%;
-    &::-webkit-scrollbar {
-      display: none;
-    }
+    /*&::-webkit-scrollbar {*/
+    /*  display: none;*/
+    /*}*/
 
     /*表格*/
     .tableUser {
@@ -269,6 +345,7 @@ export default {
 
       td {
         text-align: center;
+        color: #606266;
       }
 
       /*删除标志*/
@@ -298,7 +375,14 @@ export default {
       }
     }
   }
-
+  .page {
+    width: 100%;
+    display: flex;
+    margin-top: 15px;
+    .page_el {
+      margin: auto;
+    }
+  }
   /*修改界面*/
   .modify {
     display: none;

@@ -36,10 +36,10 @@
 </template>
 
 <script>
-    import axios from "axios";
-    import $ from "animate.css";
+import axios from "axios";
+import $ from "animate.css";
 
-    export default {
+export default {
   $,
   name: "revise",
   data() {
@@ -61,21 +61,23 @@
         return false;
       }
       axios({
-          url: "https://www.whbqd.xyz/Login/checking",
-          methods: "get",
-          params: {
-              user: this.user,
-              email: this.email
-          }
+        url: "http://localhost:8080/user/checking",
+        method: "post",
+        params: {
+          user: this.user,
+          email: this.email
+        }
       })
         .then(res => {
-            console.log("#checking ▼")
-            console.log(res);
-          if (res.data.msg === false) {
-            this.$message.error("账号或邮箱错误!");
+          console.log("#checking ▼");
+          console.log(res);
+          if (res.data.code === 104) {
+            this.$message.error(res.data.message);
             return false;
+          } else {
+            this.$message.success(res.data.message);
+            this.$router.push(`/revise?user=${this.user}`);
           }
-          this.$router.push(`/revise?user=${this.user}&email=${this.email}`);
         })
         .catch(err => {
           err;

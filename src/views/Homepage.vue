@@ -11,21 +11,21 @@
         <!--标语-->
         <div class="wzright">
           <p>上午好, {{ username }}, 准备吃什么呢?</p>
-          <span>前端工程师 | 某某某事业群 • VUE平台</span>
+          <span>大数据开发 | 102班 • 后台管理平台</span>
         </div>
       </div>
       <ul class="data">
         <li>
           <span class="Name">项目</span>
-          <span class="count">56</span>
+          <span class="count">1</span>
         </li>
         <li>
           <span class="Name">团队排名</span>
-          <span class="count">8/24</span>
+          <span class="count">0</span>
         </li>
         <li>
           <span class="Name">项目数</span>
-          <span class="count">2,223</span>
+          <span class="count">1</span>
         </li>
       </ul>
     </div>
@@ -38,69 +38,30 @@
             <div class="item">
               <div class="itemTop">
                 <img src="../assets/timg.jpg" alt="" />
-                <span>player</span>
+                <span>后台管理系统</span>
               </div>
               <div class="itemBottom">
                 <span
-                  >音乐播放器 - 网易云Api。用音乐歌唱青春,用心灵创造生活</span
+                  >用户管理，商品管理</span
                 >
-                <a href="https://www.whbqd.xyz/player" target="_blank">详情></a>
+                <a href="#" target="_blank">详情></a>
               </div>
             </div>
           </td>
           <!--项目2-->
-          <td class="br l1t2d">
-            <div class="item">
-              <div class="itemTop">
-                <img src="../assets/wyy.png" alt="" />
-                <span>网易云</span>
-              </div>
-              <div class="itemBottom">
-                <span>非cli项目，播放器, 天气预报</span>
-                <a
-                  href="https://www.whbqd.xyz/vue"
-                  target="_blank"
-                  style="right: 50px"
-                  >music></a
-                >
-                <a href="https://www.whbqd.xyz/vue/weather.html" target="_blank"
-                  >天气></a
-                >
-              </div>
-            </div>
+          <td class="br l1t2d Null">
+            空
           </td>
         </tr>
         <!--第二行-->
         <tr>
           <!--项目3-->
-          <td>
-            <div class="item">
-              <div class="itemTop">
-                <img src="../assets/github.jpg" alt="" />
-                <span>GitHub</span>
-              </div>
-              <div class="itemBottom">
-                <span>Java前后端分离源码</span>
-                <a
-                  href="https://github.com/whbqd/mutual/tree/Api"
-                  target="_blank"
-                  >详情></a
-                >
-              </div>
-            </div>
+          <td class="Null">
+            空
           </td>
           <!--项目4-->
-          <td class="br">
-            <div class="item">
-              <div class="itemTop">
-                <img src="../assets/vue2.png" alt="" />
-                <span>login</span>
-              </div>
-              <div class="itemBottom">
-                <span>用户登录 - 前后端分离。</span>
-                <a href="https://www.whbqd.xyz/login" target="_blank">详情></a>
-              </div>
-            </div>
+          <td class="br Null">
+            空
           </td>
         </tr>
       </table>
@@ -108,12 +69,24 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   name: "Homepage",
   data() {
     return {
-      username: window.sessionStorage.getItem("username")
+      username: "用户名"
     };
+  },
+  created() {
+    axios({
+      url: "http://localhost:8080/user/view/getUserOfLogin",
+      method: "post",
+      headers: {
+        token: window.localStorage.getItem("token")
+      }
+    }).then(res => {
+      this.username = res.data.data.user;
+    });
   }
 };
 </script>
@@ -127,14 +100,17 @@ export default {
     border-left: 4px solid #353b48;
     color: #2f3640;
     height: 20px;
+    font-size: 20px;
     line-height: 20px;
     margin-bottom: 10px;
     padding-left: 3px;
     margin-left: 8px;
+    margin-top: 10px;
   }
   /*个人标语块*/
   .top {
     width: 100%;
+    min-width: 950px;
     height: 150px;
     background-color: #2f3640;
     border-bottom-right-radius: 3px;
@@ -163,6 +139,7 @@ export default {
         p {
           font-size: 21px;
           font-weight: bold;
+          margin-top: 20px;
           margin-bottom: 5px;
           margin-left: 7px;
         }
@@ -211,7 +188,7 @@ export default {
   /*项目块*/
   .cent {
     width: 590px;
-    height: 390px;
+    height: 391px;
     background-color: #2f3640;
     border-radius: 5px;
     margin-left: 7px;
@@ -227,12 +204,13 @@ export default {
     /*表格*/
     .project {
       box-sizing: border-box;
-      width: 550px;
+      width: 590px;
       height: 300px;
       border-collapse: collapse;
       tr {
         box-sizing: border-box;
         width: 450px;
+        height: 170px;
         td {
           box-sizing: border-box;
           padding: 10px;
@@ -307,4 +285,8 @@ export default {
     }
   }
 }
+  .Null {
+    font-size: 21px;
+    text-align: center;
+  }
 </style>

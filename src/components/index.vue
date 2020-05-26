@@ -5,11 +5,41 @@
       <span class="title"
         ><span class="el-icon-s-tools"></span>后台管理系统</span
       >
-      <div class="userImg">
-        <span class="out" @click="outLogin">退出登录</span>
+      <div id="img_down" class="userImg" @mouseenter="mouseIn()">
         <img src="../assets/default_colleagues.jpg" alt="" />
         <span>{{ UserName }}</span>
       </div>
+      <template>
+        <div
+          style="display:none; padding: 0;z-index: 999999;position: absolute;right: 0;background: #dcdde1"
+          id="cd_down"
+          @mouseleave="mouseOut()"
+        >
+          <Card
+            title="个人"
+            icon="md-person"
+            :padding="0"
+            shadow
+            style="width: 200px;"
+            class="downCard"
+          >
+            <!--          <Card-->
+            <!--            :title="UserName"-->
+            <!--            icon="md-person"-->
+            <!--            :padding="0"-->
+            <!--            shadow-->
+            <!--            style="width: 180px;"-->
+            <!--            class="downCard"-->
+            <!--          >-->
+            <CellGroup style="color:#000">
+              <Cell title="个人主页" to="/index/Homepage" style="color: #000" />
+              <Cell title="用户管理" label="用户" to="/index/Table" style="color: #000"/>
+              <Cell title="商品管理" label="商品" to="/index/commodity" style="color: #000" />
+              <div class="outlogin" @click="outLogin()">退出登录</div>
+            </CellGroup>
+          </Card>
+        </div>
+      </template>
     </div>
     <!--中-->
     <div class="container">
@@ -25,7 +55,7 @@
         <div class="t1">
           <ul class="gn">
             <li class="li1" @click="gn1Hide()">
-              <span class="gn1Icon1 el-icon-menu"></span>功能区1
+              <span class="gn1Icon1 el-icon-menu"></span>用户
               <span class="gn1Icon2 el-icon-arrow-down"></span>
             </li>
             <li class="li2">
@@ -43,17 +73,13 @@
         <div class="t1">
           <ul class="gn">
             <li class="li1" @click="gn2Hide()">
-              <span class="gn2Icon1 el-icon-s-data"></span>功能区2
+              <span class="gn2Icon1 el-icon-s-data"></span>商品
               <span class="gn2Icon2 el-icon-arrow-down"></span>
             </li>
             <li class="gn2li2">
-              <router-link to="####">组件1</router-link>
-            </li>
-            <li class="gn2li2">
-              <router-link to="#####">组件2</router-link>
-            </li>
-            <li class="gn2li2">
-              <router-link to="######">组件3</router-link>
+              <router-link to="/index/commodity" class="tb"
+                >商品管理</router-link
+              >
             </li>
           </ul>
         </div>
@@ -68,6 +94,7 @@
 
 <script>
 import $ from "jquery";
+import axios from "axios";
 export default {
   data() {
     return {
@@ -79,7 +106,15 @@ export default {
     };
   },
   created() {
-    this.UserName = window.sessionStorage.getItem("username");
+    axios({
+      url: "http://localhost:8080/user/view/getUserOfLogin",
+      method: "post",
+      headers: {
+        token: window.localStorage.getItem("token")
+      }
+    }).then(res => {
+      this.UserName = res.data.data.user;
+    });
   },
   methods: {
     // 功能1与2的下拉效果及图标转换
@@ -109,10 +144,30 @@ export default {
     },
     // 退出登录点击事件
     outLogin() {
+      axios({
+        url: "http://localhost:8080/user/view/logout",
+        method: "post",
+        headers: {
+          token: window.localStorage.getItem("token")
+        }
+      }).then(res => {
+        console.log(res);
+        if (res.data.code === 100) {
+          this.$message.success(res.data.message);
+        } else {
+          this.$message.error(res.data.message);
+        }
+      });
       // 清空token
-      window.sessionStorage.clear();
+      window.localStorage.removeItem("token");
       // 跳转到登录页
       this.$router.push("/login");
+    },
+    mouseIn() {
+      $("#cd_down").fadeIn(200);
+    },
+    mouseOut() {
+      $("#cd_down").fadeOut(700);
     }
   }
 };
@@ -147,17 +202,9 @@ export default {
     .userImg {
       display: flex;
       float: right;
-      margin-right: 5px;
+      margin-right: 30px;
       height: 50px;
-      /*退出登录*/
-      .out {
-        font-size: 14px;
-        margin-right: 10px;
-        cursor: pointer;
-        &:hover {
-          color: #ced6e0;
-        }
-      }
+      cursor: pointer;
       /*用户图片*/
       img {
         height: 40px;
@@ -169,6 +216,21 @@ export default {
       span {
         font-size: 15px;
         margin-left: 5px;
+      }
+    }
+    .downCard {
+      background: #dcdde1;
+      box-shadow: 0 0 15px #2d3436;
+      .outlogin {
+        background: #7f8fa6;
+        width: 100%;
+        height: 35px;
+        text-align: center;
+        line-height: 35px;
+        cursor: pointer;
+        &:hover {
+          color: #000;
+        }
       }
     }
   }
@@ -276,6 +338,10 @@ export default {
             cursor: pointer;
             font-weight: bold;
             font-size: 15px;
+            .tb {
+              display: inline-block;
+              width: 100%;
+            }
             /*li的选中状态*/
             .router-link-active {
               color: #7d5fff;

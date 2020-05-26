@@ -10,6 +10,7 @@ import Table from "../views/Table";
 import From from "../views/From";
 import List from "../views/List";
 import Homepage from "../views/Homepage";
+import commodity from "../views/commodity"
 Vue.use(VueRouter);
 const routes = [
   {
@@ -60,6 +61,10 @@ const routes = [
       {
         path: "/index/Homepage",
         component: Homepage
+      },
+      {
+        path: "/index/commodity",
+        component: commodity
       }
     ]
   }
@@ -83,7 +88,7 @@ router.beforeEach((to, from, next) => {
   )
     return next();
   // 获取token
-  const token = window.sessionStorage.getItem("token");
+  const token = window.localStorage.getItem("token");
   // 没有token则强制跳转到登录页面
   if (!token) return next("/login");
   // 有token就放行
