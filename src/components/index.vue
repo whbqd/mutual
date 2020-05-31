@@ -163,12 +163,12 @@ export default {
       // 跳转到登录页
       this.$router.push("/login");
     },
-      mouseIn() {
-        $("#cd_down").fadeToggle();
-      },
-      mouseOut() {
-          $("#cd_down").fadeToggle();
-      }
+    mouseIn() {
+      $("#cd_down").fadeIn(200);
+    },
+    mouseOut() {
+      $("#cd_down").fadeOut(700);
+    }
   }
 };
 </script>

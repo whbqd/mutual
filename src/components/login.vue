@@ -1,84 +1,236 @@
 <template>
-  <div class="login animated rollIn">
-    <h1>登录</h1>
-    <!--账号-->
-    <div class="dy">
-      <input
-        :class="{ f: UserFocus || user !== '' }"
-        @blur="UserFocus = false"
-        @focus="UserFocus = true"
-        class="input"
-        type="text"
-        v-model="user"
-      />
-      <span class="title" data-placeholder="账号" />
-    </div>
-    <!--密码-->
-    <div class="dy">
-      <input
-        :class="{ f: PwdFocus || password !== '' }"
-        @blur="PwdFocus = false"
-        @focus="PwdFocus = true"
-        class="input"
-        type="password"
-        v-model="password"
-      />
-      <span class="title" data-placeholder="密码" />
-    </div>
-    <div class="forget">
-      <router-link to="/checking">忘记密码？</router-link>
-    </div>
-    <!--登录-->
-    <input @click="login()" class="btn" type="button" value="登录" />
-    <!--注册-->
-    <div class="register">
-      没有账号，点击注册?
-      <router-link to="/register">注册</router-link>
+  <div class="login_box animated bounce">
+    <div class="container">
+      <!--      左侧图片-->
+      <div class="img_left">
+        <img :class="{ bz: name !== 'LOGIN' }" src="../assets/bz.jpg" alt="" />
+        <img
+          :class="{ bz: name !== 'SIGNUP' }"
+          src="../assets/bz2.jpg"
+          alt=""
+        />
+      </div>
+      <!--      右侧-->
+      <div class="panel">
+        <!--        头像-->
+        <div class="img_top"><img src="../assets/tx.png" alt="" /></div>
+        <div class="dev">
+          <span
+            @click="
+              (name = 'LOGIN'),
+                (UserName = ''),
+                (Password = ''),
+                (Repeat = ''),
+                (Email = '')
+            "
+            :class="{ active: name === 'LOGIN' }"
+            id="login"
+            >Login</span
+          ><span> / </span
+          ><span
+            @click="
+              (name = 'SIGNUP'),
+                (UserName = ''),
+                (Password = ''),
+                (Repeat = ''),
+                (Email = '')
+            "
+            :class="{ active: name === 'SIGNUP' }"
+            id="signup"
+            >SignUp</span
+          >
+        </div>
+        <div class="form">
+          <!--          账号-->
+          <div class="input">
+            <input
+              :class="{ f: userFocus || UserName !== '' }"
+              @blur="userFocus = false"
+              @focus="userFocus = true"
+              type="text"
+              v-model="UserName"
+            />
+            <span class="title" data-placeholder="UserName" />
+          </div>
+          <!--          密码-->
+          <div class="input">
+            <input
+              :class="{ f: pwdFocus || Password !== '' }"
+              @blur="pwdFocus = false"
+              @focus="pwdFocus = true"
+              type="password"
+              v-model="Password"
+            />
+            <span class="title" data-placeholder="Password" />
+          </div>
+          <!--          确认密码-->
+          <div :class="{ repeat: name !== 'SIGNUP' }" class="input">
+            <input
+              :class="{ f: repeatFocus || Repeat !== '' }"
+              @blur="repeatFocus = false"
+              @focus="repeatFocus = true"
+              type="password"
+              v-model="Repeat"
+            />
+            <span class="title" data-placeholder="Repeat" />
+          </div>
+          <!--          邮箱-->
+          <div :class="{ email: name !== 'SIGNUP' }" class="input">
+            <input
+              :class="{ f: emailFocus || Email !== '' }"
+              @blur="emailFocus = false"
+              @focus="emailFocus = true"
+              type="email"
+              v-model="Email"
+            />
+            <span class="title" data-placeholder="Email" />
+          </div>
+          <!--          忘记密码-->
+          <span class="forget"
+            ><router-link to="/checking">Forget?</router-link></span
+          >
+          <!--          按钮-->
+          <button @click="submit()">{{ name }}</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import $ from "animate.css";
-
 export default {
-  $,
-  name: "login",
   data() {
     return {
-      UserFocus: false,
-      user: "",
-      PwdFocus: false,
-      password: ""
+      name: "LOGIN",
+      UserName: "",
+      Password: "",
+      Repeat: "",
+      Email: "",
+
+      userFocus: false,
+      pwdFocus: false,
+      repeatFocus: false,
+      emailFocus: false
     };
   },
   methods: {
+    submit() {
+      if (this.name === "SIGNUP") {
+        this.register();
+      } else {
+        this.login();
+      }
+    },
+    // 注册
+    register() {
+      if (
+        this.UserName === "" ||
+        this.Password === "" ||
+        this.Repeat === "" ||
+        this.Email === ""
+      ) {
+        this.$notify({
+          type: "error",
+          title: "null",
+          position: "top-left"
+        });
+        return false;
+      }
+      if (this.Password !== this.Repeat) {
+        this.$notify({
+          type: "error",
+          title: "Password",
+          message: "Passwords are inconsistent",
+          position: "top-left"
+        });
+        return false;
+      }
+      axios({
+        url: "http://localhost:8080/user/register",
+        method: "post",
+        params: {
+          user: this.UserName,
+          password: this.Password,
+          email: this.Email
+        }
+      })
+        .then(res => {
+          console.log(res);
+          if (res.data.code === 100) {
+            this.$notify({
+              type: "success",
+              title: "Register",
+              message: "register was successful",
+              position: "top-left"
+            });
+            this.name = "LOGIN";
+          } else {
+            this.$notify({
+              type: "error",
+              title: "UserName",
+              message: "repeat of user name",
+              position: "top-left"
+            });
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          this.$notify({
+            type: "error",
+            title: "Error",
+            message: "Server exception",
+            position: "top-left"
+          });
+        });
+    },
     login() {
+      if (this.UserName === "" || this.Password === "") {
+        this.$notify({
+          type: "error",
+          title: "Error",
+          message: "Null",
+          position: "top-left"
+        });
+        return false;
+      }
       axios({
         url: "http://localhost:8080/user/login",
         method: "post",
         params: {
-          user: this.user,
-          password: this.password
+          user: this.UserName,
+          password: this.Password
         }
       })
         .then(res => {
-          console.log("#login ▼");
           console.log(res);
-          if (res.data.code === 104) {
-            this.$message.error(res.data.message);
-            return false;
-          }
           if (res.data.code === 100) {
-            this.$message.success(res.data.message);
+            this.$notify({
+              type: "success",
+              title: "Login",
+              message: "login was successful",
+              position: "top-right",
+              duration: 1500
+            });
             window.localStorage.setItem("token", res.data.data);
-            this.$router.push(`/index`);
+            this.$router.push("/index");
+          } else {
+            this.$notify({
+              type: "error",
+              title: "Error",
+              message: "Error Incorrect username or password",
+              position: "top-left"
+            });
           }
         })
         .catch(err => {
-          err;
-          this.$message.error("服务器异常！");
+          console.log(err);
+          this.$notify({
+            type: "error",
+            title: "Error",
+            message: "Server exception",
+            position: "top-left"
+          });
         });
     }
   }
@@ -86,128 +238,150 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-* {
-  margin: 0;
-  padding: 0;
-}
-.login {
-  box-sizing: border-box;
-  width: 360px;
-  height: 550px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin-left: -180px;
-  margin-top: -275px;
-  padding: 20px 40px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.8);
-  h1 {
-    margin: 60px 0;
-    text-align: center;
-  }
-}
-
-/*//input块*/
-.dy {
-  border-bottom: 2px solid #bdc3c7;
-  position: relative;
-  margin: 46px 0;
-
-  .input {
-    box-sizing: border-box;
-    width: 100%;
-    height: 40px;
-    border: none;
-    background: none;
-    outline: none;
-    padding: 0 5px;
-    font-size: 15px;
-  }
-
-  .title {
-    &::before {
-      content: attr(data-placeholder);
-      font-size: 18px;
-      color: #bdc3c7;
-      position: absolute;
-      left: 5px;
-      top: 9px;
-      transition: 0.5s;
-      z-index: -1;
-    }
-
-    &::after {
-      content: "";
-      width: 0;
-      height: 2px;
-      background: linear-gradient(#3498db, #a29bfe);
-      position: absolute;
-      left: 0;
-      bottom: -2px;
-      z-index: 10000;
-      transition: 0.5s;
-    }
-  }
-}
-
-.f + .title::after {
+.login_box {
   width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*模块*/
+  .container {
+    display: flex;
+    width: 877px;
+    min-width: 877px;
+    height: 640px;
+    border-radius: 7px;
+    overflow: hidden;
+    /*左侧图片*/
+    .img_left {
+      img {
+        width: 32rem;
+      }
+    }
+    /*右侧*/
+    .panel {
+      /*margin: 12rem 0 4rem;*/
+      width: 365px;
+      background: #fff;
+      height: 100%;
+      text-align: center;
+      .img_top {
+        margin: 20px 0 20px;
+        img {
+          width: 130px;
+        }
+      }
+      /*文字导航*/
+      .dev {
+        span {
+          color: #ccc;
+          font-size: 1.4rem;
+          cursor: pointer;
+        }
+      }
+      .form {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 0 70px;
+        margin: 2.3rem 0 0;
+        .input {
+          position: relative;
+          opacity: 1;
+          height: 2rem;
+          width: 100%;
+          margin: 1.9rem auto;
+          transition: 0.4s;
+          input {
+            outline: none;
+            width: 100%;
+            border: none;
+            border-bottom: 2px solid #95a5a6;
+            background: none;
+            z-index: 99999;
+            height: 20px;
+            font-size: 15px;
+          }
+          .title {
+            &::before {
+              content: attr(data-placeholder);
+              font-size: 18px;
+              color: #2c3e50;
+              position: absolute;
+              left: 0;
+              top: -5px;
+              transition: 0.3s;
+            }
+            &::after {
+              content: "";
+              width: 0;
+              height: 2px;
+              background: linear-gradient(120deg, #95a5a6, #34495e, #2c3e50);
+              position: absolute;
+              left: 0;
+              bottom: 11px;
+              z-index: 10000;
+              transition: 0.3s;
+            }
+          }
+        }
+        .forget > * {
+          position: relative;
+          left: -83px;
+          font-size: 13px;
+          cursor: pointer;
+          color: #2f3640;
+        }
+        button {
+          border: none;
+          outline: none;
+          margin: 1.5rem 0 0;
+          width: 100%;
+          height: 3.5rem;
+          border-radius: 3rem;
+          background: linear-gradient(90deg, #636e72, #2d3436);
+          cursor: pointer;
+          color: white;
+          transition: 0.4s;
+          &:hover {
+            box-shadow: 0 0 8px #2d3436;
+          }
+        }
+
+        .repeat,
+        .email {
+          margin: 0 !important;
+          height: 0 !important;
+          opacity: 0 !important;
+        }
+      }
+    }
+  }
+}
+.active {
+  color: #34495e !important;
+}
+.f + .title::after {
+  width: 100% !important;
 }
 
 .f + .title::before {
-  top: -17px;
+  top: -25px !important;
+  font-size: 15px !important;
 }
-
-//忘记密码
-.forget {
-  width: 100%;
-  position: relative;
-
-  a {
-    font-size: 14px;
-    color: #a29bfe;
-    position: absolute;
-    right: 0;
-    top: -20px;
-    text-decoration: none;
-    font-weight: bold;
-
-    &:hover {
-      color: #74b9ff;
-    }
+.bz {
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+  /*transition: 0.3s !important;*/
+}
+@media screen and (max-width: 940px) {
+  .container {
+    width: 365px !important;
+    min-width: 365px !important;
+    justify-content: center;
   }
-}
-
-//登录
-.btn {
-  width: 100%;
-  height: 50px;
-  border: none;
-  border-radius: 4px;
-  outline: none;
-  font-size: 20px;
-  color: #fff;
-  margin: 15px 0;
-  cursor: pointer;
-  background: linear-gradient(120deg, #74b9ff, #a29bfe, #fab1a0);
-  background-size: 200%;
-  transition: 0.4s;
-
-  &:hover {
-    background-position: right;
-  }
-}
-
-//注册
-.register {
-  width: 100%;
-  text-align: center;
-  margin-top: 25px;
-  font-size: 14px;
-
-  a {
-    margin-left: 7px;
+  .img_left {
+    display: none;
   }
 }
 </style>
