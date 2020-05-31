@@ -186,7 +186,9 @@ export default {
   methods: {
     // 取消添加商品
     outCancel() {
-      this.formData = {};
+      for (let i in this.formData) {
+        this.formData[i] = "";
+      }
       this.value3 = false;
     },
     // 添加商品

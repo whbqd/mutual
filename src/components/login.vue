@@ -3,11 +3,11 @@
     <div class="container">
       <!--      左侧图片-->
       <div class="img_left">
-        <img :class="{ bz: name !== 'LOGIN' }" src="../assets/bz.jpg" alt="" />
+        <img :class="{ bz: name !== 'LOGIN' }" src="../assets/bz.jpg" :title="name" />
         <img
           :class="{ bz: name !== 'SIGNUP' }"
           src="../assets/bz2.jpg"
-          alt=""
+          :title="name"
         />
       </div>
       <!--      右侧-->
